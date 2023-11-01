@@ -28,8 +28,7 @@ class LoginController extends Controller
             // その場合トップページに遷移させる
             return redirect('top');
         }else{
-            dd($userdata);
-
+            // dd($userdata);
             return redirect('loginform')->with('flash_message', 'name or password is incorrect');
          // 失敗すればログイン画面へ遷移させる
 
