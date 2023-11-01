@@ -11,10 +11,17 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
+
+// トップ画面
+Route::get('top', 'Admin\Post\TopController@top')->name('top');
+
+// ログイン機能
+Route::post('/login', 'Auth\Login\LoginController@login')->name('login');
+

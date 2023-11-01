@@ -7,5 +7,5 @@ use Illuminate\Http\Request;
 
 class PostCommentsController extends Controller
 {
-    //
+    //新規投稿
 }

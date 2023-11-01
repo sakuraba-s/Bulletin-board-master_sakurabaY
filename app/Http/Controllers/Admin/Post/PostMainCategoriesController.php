@@ -7,5 +7,5 @@ use Illuminate\Http\Request;
 
 class PostMainCategoriesController extends Controller
 {
-    //
+    //カテゴリ追加画面
 }

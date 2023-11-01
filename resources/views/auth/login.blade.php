@@ -9,6 +9,7 @@
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
+                        <!-- route ビュー側でURLを指定する描き方 -->
                         @csrf
 
                         <div class="form-group row">
