@@ -14,4 +14,10 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(UsersTableSeeder::class);
     }
+
+    // テーブル内のデータを一括削除
+    // public function run()
+    // {
+    //     \App\Models\Users\User::truncate();
+    // }
 }

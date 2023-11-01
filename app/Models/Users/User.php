@@ -15,5 +15,6 @@ class User extends Authenticatable
         'email',
         'password',
         'admin_role',
+        // カラムに値を挿入できるようにする
     ];
 }
