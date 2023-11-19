@@ -25,3 +25,6 @@ Route::get('top', 'Admin\Post\TopController@top')->name('top');
 // ログイン機能
 Route::post('/login', 'Auth\Login\LoginController@login')->name('login');
 
+// ユーザー登録機能
+Route::post('/register', 'Auth\Register\RegisterController@Register')->name('register');
+
