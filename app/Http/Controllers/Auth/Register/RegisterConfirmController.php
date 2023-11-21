@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth\Register;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Mail;
 
 class RegisterConfirmController extends Controller
 {
@@ -17,8 +18,8 @@ class RegisterConfirmController extends Controller
 
         // メールを送るためには、Mailファサードのsendメソッドを使います。
         // （※メールの文章自体はBladeで作成）
-        Mail::send(array('text' => 'email.message'), $dataArray , function($message) use ($dataArray){
-            $message->to($dataArray["email"])->subject($dataArray["title"]);
+        Mail::send(function($message) use ($dataArray){
+            $message->to($dataArray["email"]);
           });
 
 

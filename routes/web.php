@@ -15,12 +15,20 @@
 //     return view('welcome');
 // });
 
-Auth::routes();
+// Auth::routes();
+Auth::routes(['verify' => true]);
 
 // Route::get('/home', 'HomeController@index')->name('home');
 
+
+// メール確認済みのverifiedユーザー以外は各ルートにアクセスできない
+Route::middleware(['verified'])->group(function(){
 // トップ画面
 Route::get('top', 'Admin\Post\TopController@top')->name('top');
+
+
+});
+
 
 // ログイン機能
 Route::post('/login', 'Auth\Login\LoginController@login')->name('login');
