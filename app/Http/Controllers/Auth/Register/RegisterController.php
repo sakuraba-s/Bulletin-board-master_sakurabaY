@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Auth\Register;
 
 use App\Http\Controllers\Controller;
+
+// フォームリクエストの読み込み
 use Illuminate\Http\Request;
-use App\Http\Requests\registerUsersRequest;
+use App\Http\Requests\registerPostRequest;
 
 
 class RegisterController extends Controller
@@ -22,8 +24,8 @@ class RegisterController extends Controller
     // ユーザー登録処理
     // ユーザ新規登録
     // バリデーションをかませる
-    // バリデーションルールのファイルは「App\Http\Requests\registerUsersRequest;」(※useでルートを記述しよう)
-    public function registerUsers(registerUsersRequest $request)
+    // ※バリデーションルールのファイルは「App\Http\Requests\registerUserRequest;」
+    public function registerUser(registerUserRequest $request)
     {
         DB::beginTransaction();
         try{
