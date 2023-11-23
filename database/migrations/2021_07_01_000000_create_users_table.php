@@ -13,6 +13,7 @@ class CreateUsersTable extends Migration
             $table->integer('id')->autoIncrement()->comment('id');
             $table->string('username', 60)->comment('名前');
             $table->string('email', 255)->unique()->comment('メールアドレス');
+            $table->timestamp('email_verified_at')->nullable();
             $table->string('password', 255)->comment('パスワード');
             $table->integer('admin_role')->default(10)->nullable()->comment('権限');
             $table->timestamp('created_at')->useCurrent()->comment('登録日時');

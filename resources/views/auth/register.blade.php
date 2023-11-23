@@ -8,7 +8,8 @@
                 <div class="card-header">{{ __('ユーザー登録') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('verify') }}">
+                    <!-- ユーザー登録処理のルートへ値を渡す -->
+                    <form method="POST" action="{{ route('registerUsers') }}">
                         @csrf
 
                         <div class="form-group row">

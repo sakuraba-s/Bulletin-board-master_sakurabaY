@@ -16,6 +16,7 @@
 // });
 
 // Auth::routes();
+// メール確認の機能を有効にする
 Auth::routes(['verify' => true]);
 
 // Route::get('/home', 'HomeController@index')->name('home');
@@ -27,12 +28,17 @@ Route::middleware(['verified'])->group(function(){
 Route::get('top', 'Admin\Post\TopController@top')->name('top');
 
 
+
 });
+
+Route::get('/verify', function () {
+    return view('auth.verify');
+})->middleware('auth')->name('verification.notice');
+
 
 
 // ログイン機能
-Route::post('/login', 'Auth\Login\LoginController@login')->name('login');
+// ユーザ登録機能
+// ˧Router.phpに記述あります！
 
-// ユーザー登録機能
-Route::post('/register', 'Auth\Register\RegisterController@Register')->name('register');
 
