@@ -31,9 +31,9 @@ Route::get('top', 'Admin\Post\TopController@top')->name('top');
 
 });
 
-Route::get('/verify', function () {
-    return view('auth.verify');
-})->middleware('auth')->name('verification.notice');
+// Route::get('/verify', function () {
+//     return view('auth.verify');
+// })->middleware('auth')->name('verification.notice');
 
 
 
