@@ -9,7 +9,7 @@
 
                 <div class="card-body">
                     <!-- ユーザー登録処理のルートへ値を渡す -->
-                    <form method="POST" action="{{ route('registerUsers') }}">
+                    <form method="POST" action="{{ route('registerUser') }}">
                         @csrf
 
                         <div class="form-group row">

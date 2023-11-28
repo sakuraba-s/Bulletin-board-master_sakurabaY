@@ -6,7 +6,12 @@ use App\Http\Controllers\Controller;
 
 // フォームリクエストの読み込み
 use Illuminate\Http\Request;
-use App\Http\Requests\registerPostRequest;
+// バリデーションのファイルの読み込み
+use App\Http\Requests\registerUserRequest;
+// トランザクションを張る
+use Illuminate\Support\Facades\DB;
+// 使用するモデルのパス
+use App\Models\Users\User;
 
 
 class RegisterController extends Controller
@@ -19,26 +24,21 @@ class RegisterController extends Controller
         // authフォルダの中のregisterファイルを指定
     }
 
-    // バリデーションを記述
-
     // ユーザー登録処理
-    // ユーザ新規登録
     // バリデーションをかませる
     // ※バリデーションルールのファイルは「App\Http\Requests\registerUserRequest;」
     public function registerUser(registerUserRequest $request)
     {
         DB::beginTransaction();
         try{
-
             // 登録
                 $user_get = User::create([
-                    'name' => $request->name,
+                    'username' => $request->name,
                     'email' => $request->email,
                     'password' => bcrypt($request->password)
                 ]);
 
                 // commitメソッドでデータベースに反映
-                // トランザクション
                 DB::commit();
                 return view('loginView');
             }catch(\Exception $e){

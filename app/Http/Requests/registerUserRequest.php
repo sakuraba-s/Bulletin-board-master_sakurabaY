@@ -13,7 +13,7 @@ class registerUserRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,8 +26,8 @@ class registerUserRequest extends FormRequest
     {
         return [
 
-            'name' => 'required|string|max:10',
-            'email' => 'required|string|max:10',
+            'name' => 'required|string|max:30',
+            'email' => 'required|string|email:dns|max:100|unique:users',
             'password' => 'required|string|min:8|max:30|confirmed',
             //
         ];
@@ -36,10 +36,11 @@ class registerUserRequest extends FormRequest
     // バリデーションメッセージ
     public function messages(){
         return [
-            'name.max' => '※名前は10文字以下で入力してください。',
-            'email' => '※メールアドレスの形式で入力してください。',
+            'name.max' => '※名前は30文字以下で入力してください。',
+            'email.email' => '※メールアドレスの形式で入力してください。',
+            'email.required' => '※メールアドレスを入力してください。',
             'email.max' => '※メールアドレスは100文字以内で入力してください。',
-            'email.unique' => '※登録済みのメールアドレスです。',
+            'email.unique' => '※このメールアドレスはすでに登録されています。',
             'password.min' => '※パスワードは8文字以上で入力してください。',
             'password.max' => '※パスワードは30文字以下で入力してください。',
             'password.confirmed' => '※パスワードが一致しません。',
