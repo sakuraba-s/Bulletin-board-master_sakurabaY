@@ -26,6 +26,8 @@ Auth::routes(['verify' => true]);
 Route::middleware(['verified'])->group(function(){
 // トップ画面
 Route::get('top', 'Admin\Post\TopController@top')->name('top');
+// Route::post('register/users', 'Auth\Register\RegisterController@registerUser')->name('registerUser');
+
 
 
 
