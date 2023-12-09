@@ -25,14 +25,18 @@ Auth::routes(['verify' => true]);
 // メール確認済みのverifiedユーザー以外は各ルートにアクセスできない
 Route::middleware(['verified'])->group(function(){
 // トップ画面
-// Route::get('top', 'Admin\Post\TopController@top')->name('top');
+Route::get('top', 'Admin\Post\TopController@top')->name('top');
+
 // Route::post('register/users', 'Auth\Register\RegisterController@registerUser')->name('registerUser');
-Route::get('/email/verify', function () {
-    return view('auth.verify-email');
-})->middleware('auth')->name('verification.notice');
-
-
 });
+
+// Route::get('top', 'Admin\Post\TopController@top')->name('top');
+
+
+
+// Route::get('/email/verify', function () {
+//     return view('auth.verify');
+// })->middleware('auth')->name('verification.notice');
 
 // Route::get('/verify', function () {
 //     return view('auth.verify');
