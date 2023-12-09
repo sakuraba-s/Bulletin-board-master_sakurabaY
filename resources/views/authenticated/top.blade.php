@@ -44,7 +44,7 @@
   </div>
   <div class="other_area border w-25">
     <div class="border m-4">
-      <div class="post_btn"><a href="{{ route('post.input') }}">投稿</a></div>
+      <!-- <div class="post_btn"><a href="{{ route('post.input') }}">投稿</a></div>
       <div class="post_btn d-flex justify-content-between">
         <input type="text" placeholder="キーワードを検索" name="keyword" form="postSearchRequest">
         <input type="submit" value="検索" form="postSearchRequest">
@@ -52,7 +52,7 @@
       <div class="d-flex justify-content-between">
         <input type="submit" name="like_posts" class="pink" value="いいねした投稿" form="postSearchRequest">
         <input type="submit" name="my_posts" class="yellow" value="自分の投稿" form="postSearchRequest">
-      </div>
+      </div> -->
       <ul>
       <h5>カテゴリ検索</h5>
 

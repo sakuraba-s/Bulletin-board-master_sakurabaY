@@ -18,8 +18,8 @@ class TopController extends Controller
         // 掲示板表示
         public function top(Request $request){
             $posts = Post::with('user', 'postComments')->get();
-            $categories = MainCategory::get();
-            $like = new Like;
+            $categories = PostMainCategory::get();
+            $like = new PostFavorite;
             $post_comment = new Post;
             if(!empty($request->keyword)){
                 // 検索ワード タイトル、投稿内容あいまい検索

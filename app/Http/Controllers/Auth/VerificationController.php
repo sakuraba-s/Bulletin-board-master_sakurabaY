@@ -13,7 +13,7 @@ class VerificationController extends Controller
      */
     public function show()
     {
-        $user->SendEmailVerificationNotification()
+        // $user->SendEmailVerificationNotification();
     return view('auth.verify');
     }
 

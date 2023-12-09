@@ -23,14 +23,14 @@ Auth::routes(['verify' => true]);
 
 
 // メール確認済みのverifiedユーザー以外は各ルートにアクセスできない
-Route::middleware(['verified'])->group(function(){
-// トップ画面
-Route::get('top', 'Admin\Post\TopController@top')->name('top');
+// Route::middleware(['verified'])->group(function(){
+// // トップ画面
+// Route::get('top', 'Admin\Post\TopController@top')->name('top');
 
 // Route::post('register/users', 'Auth\Register\RegisterController@registerUser')->name('registerUser');
-});
+// });
 
-// Route::get('top', 'Admin\Post\TopController@top')->name('top');
+Route::get('top', 'Admin\Post\TopController@top')->name('top');
 
 
 
