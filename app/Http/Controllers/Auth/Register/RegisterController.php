@@ -38,6 +38,8 @@ class RegisterController extends Controller
                     'password' => bcrypt($request->password)
                 ]);
 
+                // 認証メール送信
+                
                 // commitメソッドでデータベースに反映
                 DB::commit();
                 return view('loginView');

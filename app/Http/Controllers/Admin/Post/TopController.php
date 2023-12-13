@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 // 使用するモデル
 use App\Models\Posts\Post;
 use App\Models\Posts\PostMainCategory;
-
 use App\Models\Posts\PostSubCategory;
 use App\Models\Posts\PostFavorite;
 

@@ -30,7 +30,11 @@ Auth::routes(['verify' => true]);
 // Route::post('register/users', 'Auth\Register\RegisterController@registerUser')->name('registerUser');
 // });
 
+// トップページ表示
 Route::get('top', 'Admin\Post\TopController@top')->name('top');
+// 新規投稿ページ表示
+Route::get('top', 'User\Post\PostsController@input')->name('post.input');
+
 
 
 
