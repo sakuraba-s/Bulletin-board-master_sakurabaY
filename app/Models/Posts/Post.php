@@ -32,7 +32,7 @@ class Post extends Model
         // リレーションの定義
         // 投稿とサブカテゴリ―との中間テーブル
         // 投稿＿サブカテゴリ
-        return $this->belongsToMany('App\Models\Categories\subCategory', 'post_sub_categories','post_id','sub_category_id')->withPivot('id');
+        return $this->belongsToMany('App\Models\Posts\SubCategory', 'post_sub_categories','post_id','sub_category_id')->withPivot('id');
     }
 
     // 投稿＿いいねの関係

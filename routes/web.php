@@ -31,9 +31,15 @@ Auth::routes(['verify' => true]);
 // });
 
 // トップページ表示
-Route::get('top', 'Admin\Post\TopController@top')->name('top');
+Route::get('top/{keyword?}', 'Admin\Post\TopController@top')->name('top');
 // 新規投稿ページ表示
-Route::get('top', 'User\Post\PostsController@input')->name('post.input');
+// Route::get('top', 'User\Post\PostsController@input')->name('post.input');
+
+// 投稿詳細画面表示
+Route::get('top/{id}', 'Admin\Post\TopController@PostDetail')->name('post.detail');
+// 投稿ボタン
+Route::get('/bulletin_board/input', 'PostsController@postInput')->name('post.input');
+
 
 
 
