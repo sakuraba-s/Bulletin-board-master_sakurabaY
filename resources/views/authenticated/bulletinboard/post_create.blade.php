@@ -4,12 +4,12 @@
 <div class="post_create_container d-flex">
   <div class="post_create_area border w-50 m-5 p-5">
     <div class="">
-      <p class="mb-0">カテゴリー</p>
+      <p class="mb-0">サブカテゴリー</p>
       <select class="w-100 box" form="postCreate" name="post_category_id">
         @foreach($main_categories as $main_category)
         <optgroup label="{{ $main_category->main_category }}"></optgroup>
         <!-- サブカテゴリー表示 -->
-        <!-- 投稿とともに投稿とサブカテゴリを紐づけるためにサブカテゴリンのidを送る -->
+        <!-- 投稿とともに投稿とサブカテゴリを紐づけるためにサブカテゴリのidを送る -->
           @foreach($main_category->subCategories as $subcategory)
             <option value="{{ $subcategory->id}}">{{ $subcategory->sub_category }}</option>
           @endforeach

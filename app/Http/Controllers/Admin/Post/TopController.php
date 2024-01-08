@@ -10,6 +10,8 @@ use App\Models\Posts\MainCategory;
 use App\Models\Posts\SubCategory;
 use App\Models\Posts\Favorite;
 use App\Models\Users\User;
+// ↓これが投稿のバリデーション
+use App\Http\Requests\PostFormRequest;
 
 use Auth;
 
@@ -81,6 +83,7 @@ class TopController extends Controller
         $main_categories = MainCategory::get();
         return view('authenticated.bulletinboard.post_create', compact('main_categories'));
     }
+
     // 新規投稿機能
     // バリデーションをかませる
     public function postCreate(PostFormRequest $request){
@@ -89,7 +92,7 @@ class TopController extends Controller
         // 投稿をテーブルに反映
         $post_get = Post::create([
             'user_id' => Auth::id(),
-            'post_title' => $request->post_title,
+            'title' => $request->post_title,
             'post' => $request->post_body,
         ]);
         // リレーション
