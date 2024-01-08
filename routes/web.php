@@ -37,8 +37,11 @@ Route::get('top/{keyword?}', 'Admin\Post\TopController@top')->name('top');
 
 // 投稿詳細画面表示
 Route::get('top/{id}', 'Admin\Post\TopController@PostDetail')->name('post.detail');
-// 投稿ボタン
-Route::get('/bulletin_board/input', 'PostsController@postInput')->name('post.input');
+// 投稿画面表示
+Route::get('/bulletin_board/input', 'Admin\Post\TopController@postInput')->name('post.input');
+// 投稿機能
+Route::post('/bulletin_board/create', 'Admin\Post\TopController@postCreate')->name('post.create');
+
 
 
 
