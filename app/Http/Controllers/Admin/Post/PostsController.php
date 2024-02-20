@@ -12,6 +12,7 @@ class PostsController extends Controller
     // 投稿画面の表示
     public function Input(){
         // モデルからメインカテゴリを取得
+        // メインカテゴリの情報を持ちながら投稿ページに遷移
         $main_categories = MainCategory::get();
         return view('authenticated.bulletinboard.post_create', compact('main_categories'));
     }

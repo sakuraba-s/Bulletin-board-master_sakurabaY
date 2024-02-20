@@ -3,6 +3,8 @@
 @section('content')
 <div class="post_create_container d-flex">
   <div class="post_create_area border w-50 m-5 p-5">
+
+    <p class="w-75 m-auto">投稿一覧</p>
     <div class="">
       <p class="mb-0">サブカテゴリー</p>
       <select class="w-100 box" form="postCreate" name="post_category_id">
