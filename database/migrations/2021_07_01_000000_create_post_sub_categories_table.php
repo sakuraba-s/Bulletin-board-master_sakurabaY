@@ -16,6 +16,9 @@ class CreatePostSubCategoriesTable extends Migration
         });
     }
 
+    // サブカテゴリと投稿の中間テーブル
+
+
     /**
      * Reverse the migrations.
      *

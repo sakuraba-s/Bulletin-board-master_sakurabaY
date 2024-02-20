@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers\Admin\Post;
 
+// バリデーションのファイルの読み込み
+use App\Http\Requests\PostFormRequest;
+// 使用するモデルのパス
+use App\Models\Posts\Post;
 use App\Models\Posts\PostMainCategory;
+// フォームリクエストの読み込み
+use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+
 
 class PostsController extends Controller
 {
@@ -25,9 +31,10 @@ class PostsController extends Controller
         // 投稿をテーブルに反映
         $post_get = Post::create([
             'user_id' => Auth::id(),
-            'post_title' => $request->post_title,
             'post' => $request->post_body,
+            'post_title' => $request->post_title,
         ]);
+
         // リレーション
         // 上記で新規登録したポストテーブルのidを取得しつつテーブルを取得
         $post = Post::findOrFail($post_get->id);
