@@ -11,7 +11,6 @@ class CreatePostsTable extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->integer('id')->autoIncrement()->comment('id');
             $table->integer('user_id')->comment('ユーザーid');
-            $table->integer('post_sub_category_id')->comment('投稿サブカテゴリーid');
             $table->integer('delete_user_id')->nullable()->comment('誰が消したか');
             $table->integer('update_user_id')->nullable()->comment('誰が編集したか');
             $table->string('title', 255)->comment('タイトル');
