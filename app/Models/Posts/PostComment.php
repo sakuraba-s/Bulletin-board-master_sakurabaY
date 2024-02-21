@@ -15,5 +15,6 @@ class PostComment extends Model
         'update_user_id',
         'comment',
         'event_at',
+        'post_sub_category_id',
     ];
 }
