@@ -7,7 +7,6 @@
     <!-- <p class="w-75 m-auto">投稿一覧</p> -->
 
     <!-- 投稿内容を繰り返して表示 -->
-    
     @foreach($posts as $post)
 
     <div class="post_area border w-75 m-auto p-3">
@@ -49,28 +48,7 @@
   <div class="other_area border w-25">
     <div class="border m-4">
       <div class="post_btn"><a href="{{ route('category.create') }}">カテゴリを追加</a></div>
-
-
-      <!-- サブカテゴリー追加 -->
-      <div class="">
-        <!-- バリデーション -->
-        @if($errors->first('sub_category_name'))
-        <span class="error_message">{{ $errors->first('sub_category_name') }}</span>
-        @endif
-        <p class="m-0 mt-4">サブカテゴリー</p>
-        <select class="w-100 box" form="subCategoryRequest" name="main_category_id">
-          @foreach($main_categories as $main_category)
-          <option value="{{ $main_category->id}}">{{ $main_category->main_category}}</option>
-          @endforeach
-        </select>
-
-        <input type="text" class="w-100 box" name="sub_category_name" form="subCategoryRequest">
-        <input type="submit" value="追加" class="w-100 btn btn-primary p-0" form="subCategoryRequest">
-        <form action="{{ route('sub.category.create') }}" method="post" id="subCategoryRequest">{{ csrf_field() }}</form>
-      </div>
-
-
-
+      <!-- カテゴリ追加画面へ遷移 -->
       <div class="post_btn"><a href="{{ route('post.input') }}">投稿</a></div>
       <div class="post_btn d-flex justify-content-between">
         <input type="text" placeholder="キーワードを検索" name="keyword" form="postSearchRequest">

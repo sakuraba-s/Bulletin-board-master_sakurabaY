@@ -55,7 +55,7 @@ class PostsController extends Controller
         // モデルからメインカテゴリを取得
         // メインカテゴリの情報を持ちながらカテゴリ追加ページに遷移
         $main_categories = MainCategory::get();
-        return view('authenticated.bulletinboard.post_create', compact('main_categories'));
+        return view('authenticated.bulletinboard.category_create', compact('main_categories'));
     }
 
     // メインカテゴリの追加
