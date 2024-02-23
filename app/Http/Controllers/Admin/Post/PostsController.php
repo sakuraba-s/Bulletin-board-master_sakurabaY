@@ -49,4 +49,33 @@ class PostsController extends Controller
 
         return redirect()->route('post.show');
     }
+
+    // カテゴリ追加画面の表示
+    public function categoryCreate(){
+        // モデルからメインカテゴリを取得
+        // メインカテゴリの情報を持ちながらカテゴリ追加ページに遷移
+        $main_categories = MainCategory::get();
+        return view('authenticated.bulletinboard.post_create', compact('main_categories'));
+    }
+
+    // メインカテゴリの追加
+    // バリデーションをかませる
+    public function mainCategoryCreate(MainCategoryFormRequest $request){
+        MainCategory::create([
+            'main_category' => $request->main_category_name
+        ]);
+        return redirect()->route('post.input');
+    }
+    // サブカテゴリの追加
+    // バリデーションをかませる
+    public function subCategoryCreate(SubCategoryFormRequest $request){
+        // メインカテゴリの取得
+        $main_category_id=$request->main_category_id;
+        // サブカテゴリの追加
+        $sub_category_get = SubCategory::create([
+            'sub_category' => $request->sub_category_name,
+            'main_category_id' => $main_category_id,
+        ]);
+        return redirect()->route('post.input');
+    }
 }

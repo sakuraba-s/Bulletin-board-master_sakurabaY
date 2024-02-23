@@ -42,8 +42,11 @@ Route::get('/bulletin_board/input', 'Admin\Post\PostsController@postInput')->nam
 // 投稿機能
 Route::post('/bulletin_board/create', 'Admin\Post\PostsController@postCreate')->name('post.create');
 
-
-
+// カテゴリ追加画面表示
+Route::post('/bulletin_board/category', 'Admin\Post\PostsController@categoryCreate')->name('category.create');
+// カテゴリの追加
+Route::post('/create/main_category', 'PostsController@mainCategoryCreate')->name('main.category.create');
+Route::post('/create/sub_category', 'PostsController@subCategoryCreate')->name('sub.category.create');
 
 
 
