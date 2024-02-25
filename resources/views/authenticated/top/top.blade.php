@@ -49,6 +49,7 @@
     <div class="border m-4">
       <div class="post_btn"><a href="{{ route('category.create') }}">カテゴリを追加</a></div>
       <!-- カテゴリ追加画面へ遷移 -->
+
       <div class="post_btn"><a href="{{ route('post.input') }}">投稿</a></div>
       <div class="post_btn d-flex justify-content-between">
         <input type="text" placeholder="キーワードを検索" name="keyword" form="postSearchRequest">

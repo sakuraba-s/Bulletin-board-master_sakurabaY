@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Admin\Post;
 
 // バリデーションのファイルの読み込み
 use App\Http\Requests\PostFormRequest;
+use App\Http\Requests\MainCategoryFormRequest;
+use App\Http\Requests\SubCategoryFormRequest;
 // 使用するモデルのパス
 use App\Models\Posts\Post;
 use App\Models\Posts\MainCategory;
+use App\Models\Posts\SubCategory;
 // フォームリクエストの読み込み
 use Illuminate\Http\Request;
 
@@ -64,18 +67,20 @@ class PostsController extends Controller
         MainCategory::create([
             'main_category' => $request->main_category_name
         ]);
-        return redirect()->route('post.input');
+        return redirect()->route('category.create');
     }
     // サブカテゴリの追加
     // バリデーションをかませる
     public function subCategoryCreate(SubCategoryFormRequest $request){
         // メインカテゴリの取得
         $main_category_id=$request->main_category_id;
+        // ddd( $main_category_id);
+
         // サブカテゴリの追加
         $sub_category_get = SubCategory::create([
             'sub_category' => $request->sub_category_name,
             'main_category_id' => $main_category_id,
         ]);
-        return redirect()->route('post.input');
+        return redirect()->route('category.create');
     }
 }
