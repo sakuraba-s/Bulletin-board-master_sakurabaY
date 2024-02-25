@@ -45,23 +45,28 @@
     </div>
     @endforeach
   </div>
+
   <div class="other_area border w-25">
     <div class="border m-4">
+      <!-- カテゴリ追加画面へ -->
       <div class="post_btn"><a href="{{ route('category.create') }}">カテゴリを追加</a></div>
-      <!-- カテゴリ追加画面へ遷移 -->
-
+      <!-- 新規投稿画面へ -->
       <div class="post_btn"><a href="{{ route('post.input') }}">投稿</a></div>
+      <!-- 検索 -->
       <div class="post_btn d-flex justify-content-between">
         <input type="text" placeholder="キーワードを検索" name="keyword" form="postSearchRequest">
         <input type="submit" value="検索" form="postSearchRequest">
       </div>
+
       <div class="d-flex justify-content-between">
+        <!-- いいねした投稿に絞る -->
         <input type="submit" name="like_posts" class="pink" value="いいねした投稿" form="postSearchRequest">
+        <!-- 自分の投稿に絞る -->
         <input type="submit" name="my_posts" class="yellow" value="自分の投稿" form="postSearchRequest">
       </div>
       <ul>
+      <!-- カテゴリで投稿を絞る -->
       <h5>カテゴリ検索</h5>
-
         @foreach($categories as $category)
         <li class="main_categories acMenu" category_id="{{ $category->id }}">
           <dt><h5>{{ $category->main_category }}</h5></dt>
@@ -78,6 +83,8 @@
       </ul>
     </div>
   </div>
+
+  <!-- なにこのふぉーむ(;'∀')？？？？？ -->
   <form action="{{ route('top') }}" method="get" id="postSearchRequest"></form>
 </div>
 @endsection
