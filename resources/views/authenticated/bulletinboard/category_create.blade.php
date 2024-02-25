@@ -40,13 +40,15 @@
 
         <p class="w-75 m-auto">カテゴリ一覧</p>
         @foreach($main_categories as $main_category)
-        <optgroup label="{{ $main_category->main_category }}"></optgroup>
-            @foreach($main_category->subCategories as $subcategory)
-            <option value="{{ $subcategory->id}}">{{ $subcategory->sub_category }}</option>
-            @endforeach
+            <optgroup label="{{ $main_category->main_category }}"></optgroup>
+            <!-- outgroup選択肢グループ要素 -->
+                    @foreach($main_category->subCategories as $subcategory)
+                        <!-- 中間テーブルを使ってサブグループの情報を手に入れる -->
+                        <option value="{{ $subcategory->id}}">{{ $subcategory->sub_category }}</option>
+                        <!-- 削除したいidをGET送信する -->
+                        <span class="btn btn-primary  btn-danger"><a href="{{ route('sub.category.delete', ['id' => $subcategory->id]) }} "onclick="return confirm('削除してよろしいですか？');">削除</a></span>
+                    @endforeach
         @endforeach
-
-
     </div>
 </div>
 @endsection

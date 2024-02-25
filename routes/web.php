@@ -47,6 +47,8 @@ Route::get('/bulletin_board/category', 'Admin\Post\PostsController@categoryCreat
 // カテゴリの追加
 Route::post('/create/main_category', 'Admin\Post\PostsController@mainCategoryCreate')->name('main.category.create');
 Route::post('/create/sub_category', 'Admin\Post\PostsController@subCategoryCreate')->name('sub.category.create');
+// カテゴリの削除
+Route::get('/delete/sub_category/{id}', 'Admin\Post\PostsController@subCategoryDelete')->name('sub.category.delete');
 
 
 

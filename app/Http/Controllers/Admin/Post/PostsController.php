@@ -83,4 +83,10 @@ class PostsController extends Controller
         ]);
         return redirect()->route('category.create');
     }
+    // サブカテゴリの削除
+    public function subCategoryDelete($id){
+        // ddd($id);
+        SubCategory::findOrFail($id)->delete();
+        return redirect()->route('category.create');
+    }
 }
