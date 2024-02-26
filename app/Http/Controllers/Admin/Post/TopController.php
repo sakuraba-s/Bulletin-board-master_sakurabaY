@@ -22,12 +22,15 @@ class TopController extends Controller
              // with()でリレーション先のデータを一緒に取得する
              //posts変数にはpostテーブルとそれにリレーションされているuser情報が入っている状態
              // userはモデルのファイルに記述したリレーションのファンクション名(併記可能)
+            //  下に記述する条件検索が必要ない場合、ここで取得した投稿が一覧表示される
             $categories = MainCategory::get();
             // メインカテゴリーテーブルの中身を取得
-
+            // 「カテゴリ検索」のカテゴリ一覧にカテゴリの中身を表示させるため
             $like = new Favorite;
+            // (;'∀')
             // インスタンス化　なぜメインカテゴリのモデルはニューしなくていいの？そもそもインスタンス化とは？？
             $post_comment = new Post;
+            // (;'∀')
 
             // 検索に入力があるとき
             // タイトル…あいまい検索／サブカテゴリー…完全一致／投稿内容…あいまい検索
@@ -38,7 +41,10 @@ class TopController extends Controller
                 // いずれかヒットしたものを取得する
                 $sub_category = $request->keyword;
                 // サブカテゴリの完全一致の検索のためにこれだけ変数を用意しておく
-                $posts = Post::with('user', 'post','subCategories')
+                $posts = Post::with('user','postComments','subCategories')
+                    // リレーションを定義した3つのメソッドとともにポストテーブルを呼び出す
+                    // ユーザ情報、コメント数カウント、サブカテゴリ　　いいね数？？(;'∀')
+                    //以下でそれらを任意の条件で絞り込む
                 ->where('title', 'like', '%'.$request->keyword.'%')
                 //  投稿のタイトルが入力されたキーワードにあいまい検索で一致する場合
                 ->orWhere('post', 'like', '%'.$request->keyword.'%')
@@ -52,34 +58,45 @@ class TopController extends Controller
 
             // または一覧表示されたカテゴリから絞る
             }else if($request->category_word){
-                // クリックしたカテゴリー情報を取得
+            // クリックしたカテゴリー情報を取得
             // 検索ワード サブカテゴリ完全一致
             $sub_category = $request->category_word;
             // echo ddd($sub_category);
-            // リレーションを定義した3つのクラスとともにポストテーブルを呼び出す
-            // リレーションの情報はビューで必要
             $posts = Post::with('user', 'postComments','subCategories')
+            // リレーションを定義した3つのメソッドとともにポストテーブルを呼び出す
             ->whereHas('subCategories',function($q)use($sub_category){
             $q->where('sub_category', '=', $sub_category);
-            } )->get();
+            } )
+            // サブカテゴリが入力されたキーワードに完全一致する場合
+            ->get();
 
-            // いいねしたものをソート
+            // またはいいねしたものをソート
             }else if($request->like_posts){
-                // 認証中のユーザがいいねした投稿のIDを取得
+                // 「いいねした投稿」をクリックしたという情報を取得
                 $likes = Auth::user()->likePostId()->get('like_post_id');
-                // リレーションを定義した二つのクラスとともにポストテーブルを呼び出す
-                $posts = Post::with('user', 'postComments')
-                // ポストテーブルの中から認証中のユーザがいいねした投稿のIDに合致するものを取得
+                // リレーションを介して認証中のユーザがいいねした「投稿のID」を取得
+                $posts = Post::with('user', 'postComments','subCategories')
+                // リレーションを定義した3つのメソッドとともにポストテーブルを呼び出す
                 ->whereIn('id', $likes)->get();
+                // ポストテーブルの中から認証中のユーザがいいねした投稿のIDに合致するものを取得
+
+            // または自分の投稿のみをソート
             }else if($request->my_posts){
-                // 自分の投稿
-                $posts = Post::with('user', 'postComments')
-                ->where('user_id', Auth::id())->get();
+                // 「自分の投稿」をクリックしたという情報を取得
+                $posts = Post::with('user', 'postComments','subCategories')
+                // リレーションを定義した3つのメソッドとともにポストテーブルを呼び出す
+                ->where('user_id', Auth::id())
+                // 投稿者のユーザIDがログイン中のユーザIDに一致するものを取得
+                ->get();
             }
 
 
-            // 変数をビュー側に渡す
+            // 結果をビュー側に渡す
             return view('authenticated.top.top', compact('posts', 'categories', 'like', 'post_comment'));
+            //posts変数→冒頭で取得したポストテーブルのデータ、または絞り込みで絞られた投稿のデータ
+            // categories変数→冒頭で取得したカテゴリ一覧のデータ（カテゴリ検索」の欄用）
+            // like変数→　冒頭でインスタンス化したやつ　(;'∀')
+            // post_comment変数→　冒頭でインスタンス化したやつ　(;'∀')
         }
 
 
