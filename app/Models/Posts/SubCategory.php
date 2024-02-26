@@ -20,7 +20,8 @@ class SubCategory extends Model
         return $this->belongsTo('App\Models\Posts\MainCategory');
     }
 
-    // 中間テーブルのリレーション
+    // ★中間テーブルのリレーション
+    // 多対多
     public function posts(){
         // リレーションの定義
         // 投稿とサブカテゴリ―との中間テーブル

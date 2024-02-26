@@ -19,15 +19,19 @@ class Post extends Model
     ];
 
     // 投稿内容 ＿ユーザの関係
+    // 一つの投稿は一人の投稿者に属する
     public function user(){
         return $this->belongsTo('App\Models\Users\User');
     }
     // 投稿内容＿コメントの関係※一対多
+    // 一つの投稿は多数のコメントを持ちうる
     public function postComments(){
         return $this->hasMany('App\Models\Posts\PostComment');
     }
 
+    // ★中間テーブル
     // 投稿内容＿サブカテゴリの関係
+    // 多対多
     public function subCategories(){
         // リレーションの定義
         // 投稿とサブカテゴリ―との中間テーブル
@@ -36,6 +40,7 @@ class Post extends Model
     }
 
     // 投稿＿いいねの関係
+    // 一つの投稿は多数のいいねを持ちうる
     public function likes()
     {
         return $this->hasMany(Like::class,'like_post_id');

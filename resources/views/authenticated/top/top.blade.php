@@ -4,28 +4,41 @@
 
 <div class="board_area w-100 border m-auto d-flex">
   <div class="post_view w-75 mt-5">
-    <!-- <p class="w-75 m-auto">投稿一覧</p> -->
+    <p class="w-75 m-auto">掲示板投稿一覧</p>
 
     <!-- 投稿内容を繰り返して表示 -->
     @foreach($posts as $post)
-
+    <!-- コントローラの記述により、posts変数には絞り込まれた必要な投稿のデータが入っている -->
     <div class="post_area border w-75 m-auto p-3">
+      <!-- ユーザ名 -->
+      <!-- userメソッドが呼び出して、リレーション先の値を取得する -->
       <p><span>{{ $post->user->over_name }}</span><span class="ml-3">{{ $post->user->under_name }}</span>さん</p>
-      <!-- 詳細画面へリンク -->
+      <!-- 投稿時間 -->
+      <p><span>{{ $post->update_user_id}}</span>
+      <!-- 閲覧数 -->
+
+
+      <!-- タイトル -->
       <p class="bold"><a href="{{ route('post.detail', ['id' => $post->id]) }}">{{ $post->post_title }}</a></p>
+      <!-- タイトルは詳細画面へリンクになっている -->
 
       <div class="post_bottom_area d-flex">
         <!-- サブカテゴリ -->
         @foreach($post->subCategories as $subCategory)
           <p><span class="category_btn">{{ $subCategory->sub_category }}</span></p>
         @endforeach
-        <div class="d-flex post_status">
+
+
           <!-- コメント数 -->
+        <div class="d-flex post_status">
           <div class="mr-5"><i class="fa fa-comment"></i>
             <!-- Postモデルのメソッドを使用 -->
             <span class="">{{ $post->postComments ->count()}}</span>
           </div>
-          <!-- いいね数  jsにて実装-->
+
+
+          <!-- いいね数 -->
+          <!-- jsにて実装 -->
           <!-- Postモデルのメソッドを使用 -->
           <!-- post_idでポスト送信し、コントローラで受けとる
           ※データベース上でいいねをつける外すの機能
@@ -46,16 +59,23 @@
     @endforeach
   </div>
 
+
+
   <div class="other_area border w-25">
     <div class="border m-4">
       <!-- カテゴリ追加画面へ -->
       <div class="post_btn"><a href="{{ route('category.create') }}">カテゴリを追加</a></div>
       <!-- 新規投稿画面へ -->
       <div class="post_btn"><a href="{{ route('post.input') }}">投稿</a></div>
+
       <!-- 検索 -->
       <div class="post_btn d-flex justify-content-between">
-        <input type="text" placeholder="キーワードを検索" name="keyword" form="postSearchRequest">
-        <input type="submit" value="検索" form="postSearchRequest">
+        <form action="{{ route('top') }}" method="get">
+          <!-- inputタグに入力されたテキストをget送信する→ルーティングのURLパラメータで受け取る→コントローラで絞り込みの処理をする -->
+          <input type="text" placeholder="キーワードを検索" name="keyword">
+          <input type="submit" value="検索">
+          @csrf
+        </form>
       </div>
 
       <div class="d-flex justify-content-between">

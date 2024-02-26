@@ -31,6 +31,7 @@ Auth::routes(['verify' => true]);
 // });
 
 // トップページ表示
+// 検索した結果があれば絞り込んだものを表示させる
 Route::get('top/{keyword?}', 'Admin\Post\TopController@top')->name('top');
 // 新規投稿ページ表示
 // Route::get('top', 'User\Post\PostsController@input')->name('post.input');

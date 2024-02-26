@@ -12,44 +12,56 @@ use App\Models\Posts\Favorite;
 use App\Models\Users\User;
 // ↓これが投稿のバリデーション
 use App\Http\Requests\PostFormRequest;
-
 use Auth;
-
 
 class TopController extends Controller
 {
         // 掲示板トップ画面表示
-        // with()でリレーション先のデータを一緒に取得する
-        // userはモデルのファイルに記述したリレーションのファンクション名(併記可能)
         public function top(Request $request){
             $posts = Post::with('user')->get();
-            
-
+             // with()でリレーション先のデータを一緒に取得する
+             //posts変数にはpostテーブルとそれにリレーションされているuser情報が入っている状態
+             // userはモデルのファイルに記述したリレーションのファンクション名(併記可能)
             $categories = MainCategory::get();
+            // メインカテゴリーテーブルの中身を取得
+
             $like = new Favorite;
+            // インスタンス化　なぜメインカテゴリのモデルはニューしなくていいの？そもそもインスタンス化とは？？
             $post_comment = new Post;
 
-
             // 検索に入力があるとき
+            // タイトル…あいまい検索／サブカテゴリー…完全一致／投稿内容…あいまい検索
+
             if(!empty($request->keyword)){
+            // 空ではない
                 // 検索ワード タイトル、投稿内容あいまい検索
+                // いずれかヒットしたものを取得する
                 $sub_category = $request->keyword;
+                // サブカテゴリの完全一致の検索のためにこれだけ変数を用意しておく
                 $posts = Post::with('user', 'post','subCategories')
-                ->where('post_title', 'like', '%'.$request->keyword.'%')
+                ->where('title', 'like', '%'.$request->keyword.'%')
+                //  投稿のタイトルが入力されたキーワードにあいまい検索で一致する場合
                 ->orWhere('post', 'like', '%'.$request->keyword.'%')
+                // または投稿内容が入力されたキーワードに完全一致する場合
                 ->orwhereHas('subCategories',function($q)use($sub_category){
                     $q->where('sub_category', '=', $sub_category);
-                    } )->get();
-                }else if($request->category_word){
-                // 検索ワード サブカテゴリ完全一致
-                $sub_category = $request->category_word;
-                // echo ddd($sub_category);
-                // リレーションを定義した3つのクラスとともにポストテーブルを呼び出す
-                // リレーションの情報はビューで必要
-                $posts = Post::with('user', 'postComments','subCategories')
-                ->whereHas('subCategories',function($q)use($sub_category){
-                $q->where('sub_category', '=', $sub_category);
-                } )->get();
+                    } )
+                    // またはサブカテゴリが入力されたキーワードに完全一致する場合
+                    // Hasはあるモデルからリレーション先のテーブルに対してレコードを探してくれるメソッド
+                ->get();
+
+            // または一覧表示されたカテゴリから絞る
+            }else if($request->category_word){
+                // クリックしたカテゴリー情報を取得
+            // 検索ワード サブカテゴリ完全一致
+            $sub_category = $request->category_word;
+            // echo ddd($sub_category);
+            // リレーションを定義した3つのクラスとともにポストテーブルを呼び出す
+            // リレーションの情報はビューで必要
+            $posts = Post::with('user', 'postComments','subCategories')
+            ->whereHas('subCategories',function($q)use($sub_category){
+            $q->where('sub_category', '=', $sub_category);
+            } )->get();
 
             // いいねしたものをソート
             }else if($request->like_posts){
@@ -77,33 +89,6 @@ class TopController extends Controller
             return view('authenticated.bulletinboard.post_detail', compact('post'));
         }
 
-    // // 投稿画面の表示
-    // public function postInput(){
-    //     // モデルからメインカテゴリを取得
-    //     $main_categories = MainCategory::get();
-    //     return view('authenticated.bulletinboard.post_create', compact('main_categories'));
-    // }
-
-    // // 新規投稿機能
-    // // バリデーションをかませる
-    // public function postCreate(PostFormRequest $request){
-    //     // サブカテゴリの取得
-    //     $post_category_id=$request->post_category_id;
-    //     // 投稿をテーブルに反映
-    //     $post_get = Post::create([
-    //         'user_id' => Auth::id(),
-    //         'title' => $request->post_title,
-    //         'post' => $request->post_body,
-    //     ]);
-    //     // リレーション
-    //     // 上記で新規登録したポストテーブルのidを取得しつつテーブルを取得
-    //     $post = Post::findOrFail($post_get->id);
-    //     // 投稿とサブカテゴリの紐づけ
-    //     $post->subCategories()->attach($post_category_id);
-
-    //     return redirect()->route('post.show');
-    // }
-    
     public function logout(){
         Auth::logout();
         return redirect('/login');
