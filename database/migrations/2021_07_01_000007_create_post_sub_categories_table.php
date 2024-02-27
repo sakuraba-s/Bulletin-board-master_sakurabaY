@@ -8,6 +8,10 @@ class CreatePostSubCategoriesTable extends Migration
 {
     public function up()
     {
+        // 投稿とサブカテゴリをまとめたテーブル
+        // 一対多
+        // 投稿一つにサブカテゴリは一つ
+        // サブカテゴリ一つに対して紐づく投稿はいくつかある
         Schema::create('post_sub_categories', function (Blueprint $table) {
             $table->integer('id')->autoIncrement()->comment('id');
             $table->integer('post_id')->index()->comment('投稿のid');

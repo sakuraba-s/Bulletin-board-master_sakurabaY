@@ -8,11 +8,12 @@ class AddForeignKeyToPostSubCategoriesTable extends Migration
 {
     public function up()
     {
+        // 投稿とサブカテゴリをまとめたテーブルテーブルに対する外部制約の設定
         Schema::table('post_sub_categories', function (Blueprint $table) {
 
-            $table->foreign('post_main_category_id')
+            $table->foreign('post_id')
                 ->references('id')
-                ->on('post_main_categories')
+                ->on('posts')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
         });
@@ -21,7 +22,7 @@ class AddForeignKeyToPostSubCategoriesTable extends Migration
     public function down()
     {
         Schema::table('post_sub_categories', function (Blueprint $table) {
-            $table->dropForeign(['post_main_category_id']);
+            $table->dropForeign(['post_id']);
         });
     }
 }

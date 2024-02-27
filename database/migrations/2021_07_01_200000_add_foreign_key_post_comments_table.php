@@ -8,6 +8,8 @@ class AddForeignKeyPostCommentsTable extends Migration
 {
     public function up()
     {
+        // コメントテーブルに対する外部制約の設定
+
         Schema::table('post_comments', function (Blueprint $table) {
 
             $table->foreign('user_id')
@@ -22,17 +24,6 @@ class AddForeignKeyPostCommentsTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
-            $table->foreign('delete_user_id')
-                ->references('id')
-                ->on('users')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-
-            $table->foreign('update_user_id')
-                ->references('id')
-                ->on('users')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
         });
     }
 
@@ -41,8 +32,6 @@ class AddForeignKeyPostCommentsTable extends Migration
         Schema::table('gantt_chart_records', function (Blueprint $table) {
             $table->dropForeign(['user_id']);
             $table->dropForeign(['post_id']);
-            $table->dropForeign(['delete_user_id']);
-            $table->dropForeign(['update_user_id']);
         });
     }
 }

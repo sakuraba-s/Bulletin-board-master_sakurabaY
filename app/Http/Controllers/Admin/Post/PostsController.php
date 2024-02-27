@@ -43,7 +43,6 @@ class PostsController extends Controller
             // nullが許されていないカラムには必ず値を入れること
         ]);
 
-        // ここがおかしい(;'∀')
         // リレーション
         // 上記で新規登録したポストテーブルのidを取得しつつテーブルを取得
         $post = Post::findOrFail($post_get->id);

@@ -4,21 +4,23 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePostMainCategoriesTable extends Migration
+class CreatePostsTable extends Migration
 {
     public function up()
     {
-        Schema::create('post_main_categories', function (Blueprint $table) {
+        // 投稿のテーブル
+        Schema::create('posts', function (Blueprint $table) {
             $table->integer('id')->autoIncrement()->comment('id');
-            $table->string('main_category', 255)->unique()->comment('メインカテゴリー');
+            $table->integer('user_id')->comment('ユーザーid');
+            $table->string('title')->comment('タイトル');
+            $table->string('post')->comment('投稿内容');
             $table->timestamp('created_at')->useCurrent()->comment('登録日時');
             $table->timestamp('updated_at')->default(DB::raw('current_timestamp on update current_timestamp'))->comment('更新日時');
-            $table->softDeletes()->comment('削除日時');
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('post_main_categories');
+        Schema::dropIfExists('posts');
     }
 }

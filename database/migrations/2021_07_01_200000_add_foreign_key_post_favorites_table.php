@@ -8,6 +8,7 @@ class AddForeignKeyPostFavoritesTable extends Migration
 {
     public function up()
     {
+        // 好きテーブルに対する外部制約の設定
         Schema::table('post_favorites', function (Blueprint $table) {
 
             $table->foreign('user_id')

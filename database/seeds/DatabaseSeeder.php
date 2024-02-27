@@ -3,6 +3,7 @@
 
 use Illuminate\Database\Seeder;
 
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -12,7 +13,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(PostsTableSeeder::class);
+        // $this->call(PostsTableSeeder::class);
+        // $this->call(UsersTableSeeder::class);
+        $this->call(MaincategoriesSeeder::class);
+        $this->call(SubcategoriesSeeder::class);
     }
 
     // テーブル内のデータを一括削除

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSubCategoriesTable extends Migration
+class CreateMainCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateSubCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('sub_categories', function (Blueprint $table) {
+        // メインカテゴリテーブル
+        Schema::create('main_categories', function (Blueprint $table) {
             $table->integer('id')->autoIncrement()->comment('id');
-            $table->integer('main_category_id')->index()->comment('メインカテゴリーid');
-            $table->string('sub_category', 60)->index()->comment('サブカテゴリー');
+            $table->string('main_category', 60)->index()->comment('メインカテゴリー');
             $table->timestamp('created_at')->nullable()->comment('登録日時');
         });
     }
@@ -28,6 +28,6 @@ class CreateSubCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sub_categories');
+        Schema::dropIfExists('main_categories');
     }
 }

@@ -15,10 +15,8 @@ class PostsTableSeeder extends Seeder
         //
         Post::create([
         'user_id' => '1',
-        'post_sub_category_id' => '1',
-        'title'=> 'テスト',
-        'post' => 'おはよう',
-        'event_at' => '2024-01-07'
+        'title'=> 'きょうのてんき',
+        'post' => 'おはようきょうはいい天気ですね。いい一日になりますように。',
     ]);
     }
 }
