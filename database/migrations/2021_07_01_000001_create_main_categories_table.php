@@ -8,6 +8,7 @@ class CreateMainCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
+     * kao
      *
      * @return void
      */
@@ -20,6 +21,7 @@ class CreateMainCategoriesTable extends Migration
             $table->timestamp('created_at')->nullable()->comment('登録日時');
         });
     }
+
 
     /**
      * Reverse the migrations.
