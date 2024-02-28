@@ -15,8 +15,8 @@ class DatabaseSeeder extends Seeder
     {
         // $this->call(PostsTableSeeder::class);
         // $this->call(UsersTableSeeder::class);
-        $this->call(MaincategoriesSeeder::class);
-        $this->call(SubcategoriesSeeder::class);
+        $this->call(MaincategoriesTableSeeder::class);
+        $this->call(SubcategoriesTableSeeder::class);
     }
 
     // テーブル内のデータを一括削除

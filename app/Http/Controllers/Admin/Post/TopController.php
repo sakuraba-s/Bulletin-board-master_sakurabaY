@@ -73,7 +73,7 @@ class TopController extends Controller
             // またはいいねしたものをソート
             }else if($request->like_posts){
                 // 「いいねした投稿」をクリックしたという情報を取得
-                $likes = Auth::user()->likePostId()->get('like_post_id');
+                $likes = Auth::user()->likePostId()->get('post_id');
                 // リレーションを介して認証中のユーザがいいねした「投稿のID」を取得
                 $posts = Post::with('user', 'postComments','subCategories')
                 // リレーションを定義した3つのメソッドとともにポストテーブルを呼び出す

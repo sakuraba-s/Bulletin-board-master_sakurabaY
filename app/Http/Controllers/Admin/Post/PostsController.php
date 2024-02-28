@@ -36,7 +36,6 @@ class PostsController extends Controller
         $post_category_id=$request->post_category_id;
         // 投稿をテーブルに反映
         $post_get = Post::create([
-            'post_sub_category_id' => $post_category_id,
             'user_id' => Auth::id(),
             'title' => $request->post_title,
             'post' => $request->post_body,

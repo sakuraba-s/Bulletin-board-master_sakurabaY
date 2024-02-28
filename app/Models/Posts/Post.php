@@ -43,7 +43,7 @@ class Post extends Model
     // 一つの投稿は多数のいいねを持ちうる
     public function likes()
     {
-        return $this->hasMany(Like::class,'like_post_id');
+        return $this->hasMany(Favorite::class,'post_id');
     }
 
     // コメント数カウント
