@@ -13,10 +13,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(PostsTableSeeder::class);
-        // $this->call(UsersTableSeeder::class);
-        $this->call(MaincategoriesTableSeeder::class);
-        $this->call(SubcategoriesTableSeeder::class);
+        $this->call(UsersTableSeeder::class);
+        $this->call(PostsTableSeeder::class);
+        // $this->call(MaincategoriesTableSeeder::class);
+        // $this->call(SubcategoriesTableSeeder::class);
     }
 
     // テーブル内のデータを一括削除

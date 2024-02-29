@@ -6,9 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 // 使用するモデル
 use App\Models\Posts\Post;
+use App\Models\Posts\Like;
+
 use App\Models\Posts\MainCategory;
 use App\Models\Posts\SubCategory;
-use App\Models\Posts\Favorite;
 use App\Models\Users\User;
 // ↓これが投稿のバリデーション
 use App\Http\Requests\PostFormRequest;
@@ -23,10 +24,12 @@ class TopController extends Controller
              //posts変数にはpostテーブルとそれにリレーションされているuser情報が入っている状態
              // userはモデルのファイルに記述したリレーションのファンクション名(併記可能)
             //  下に記述する条件検索が必要ない場合、ここで取得した投稿が一覧表示される
+
+            // ddd($posts);
             $categories = MainCategory::get();
             // メインカテゴリーテーブルの中身を取得
             // 「カテゴリ検索」のカテゴリ一覧にカテゴリの中身を表示させるため
-            $like = new Favorite;
+            $like = new Like;
             // (;'∀')
             // インスタンス化　なぜメインカテゴリのモデルはニューしなくていいの？そもそもインスタンス化とは？？
             $post_comment = new Post;
@@ -89,6 +92,8 @@ class TopController extends Controller
                 // 投稿者のユーザIDがログイン中のユーザIDに一致するものを取得
                 ->get();
             }
+            // ddd($posts);
+
 
 
             // 結果をビュー側に渡す

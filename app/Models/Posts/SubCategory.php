@@ -15,17 +15,16 @@ class SubCategory extends Model
     ];
 
     // サブカテゴリは一つのメインカテゴリに属する
+    // 一対多
+    // 従→主
     public function mainCategory(){
-        // リレーションの定義
         return $this->belongsTo('App\Models\Posts\MainCategory');
     }
 
-    // ★中間テーブルのリレーション
-    // 多対多
+    // 投稿内容＿サブカテゴリの関係
+    // ※一対多
+    // 主→従
     public function posts(){
-        // リレーションの定義
-        // 投稿とサブカテゴリ―との中間テーブル
-        // 投稿＿サブカテゴリ
-        return $this->belongsToMany('App\Models\Posts\Post', 'post_sub_categories', 'sub_category_id', 'post_id')->withPivot('id');
+        return $this->belongsTo('App\Models\Posts\Post');
     }
 }

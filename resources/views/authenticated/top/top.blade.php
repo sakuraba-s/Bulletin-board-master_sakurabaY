@@ -6,13 +6,14 @@
   <div class="post_view w-75 mt-5">
     <p class="w-75 m-auto">掲示板投稿一覧</p>
 
+    <!-- そもそも投稿内容が表示できていない(;'∀') -->
     <!-- 投稿内容を繰り返して表示 -->
     @foreach($posts as $post)
     <!-- コントローラの記述により、posts変数には絞り込まれた必要な投稿のデータが入っている -->
     <div class="post_area border w-75 m-auto p-3">
       <!-- ユーザ名 -->
       <!-- userメソッドが呼び出して、リレーション先の値を取得する -->
-      <p><span>{{ $post->user->over_name }}</span><span class="ml-3">{{ $post->user->under_name }}</span>さん</p>
+      <p><span>{{ $post->user->name }}</span>さん</p>
       <!-- 投稿時間 -->
       <p><span>{{ $post->update_user_id}}</span>
       <!-- 閲覧数 -->
@@ -22,6 +23,8 @@
       <p class="bold"><a href="{{ route('post.detail', ['id' => $post->id]) }}">{{ $post->post_title }}</a></p>
       <!-- タイトルは詳細画面へリンクになっている -->
 
+
+      <!-- ここに問題あり？(;'∀') -->
       <div class="post_bottom_area d-flex">
         <!-- サブカテゴリ -->
         @foreach($post->subCategories as $subCategory)

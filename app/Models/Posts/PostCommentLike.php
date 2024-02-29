@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class PostCommentFavorite extends Model
 {
-    protected $table = 'post_comment_favorites';
+    protected $table = 'post_comment_likes';
 
     protected $fillable = [
         'user_id',

@@ -4,12 +4,12 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePostCommentFavoritesTable extends Migration
+class CreatePostCommentLikesTable extends Migration
 {
     public function up()
     {
         // コメントに対する「好き」の中間テーブル
-        Schema::create('post_comment_favorites', function (Blueprint $table) {
+        Schema::create('post_comment_likes', function (Blueprint $table) {
             $table->integer('id')->autoIncrement()->comment('id');
             $table->integer('user_id')->comment('ユーザーid');
             $table->integer('post_comment_id')->comment('コメントid');
@@ -19,6 +19,6 @@ class CreatePostCommentFavoritesTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('post_comment_favorites');
+        Schema::dropIfExists('post_comment_likes');
     }
 }

@@ -10,7 +10,7 @@ class Post extends Model
 
     protected $fillable = [
         'user_id',
-        'post_sub_category_id',
+        'sub_category_id',
         'delete_user_id',
         'update_user_id',
         'title',
@@ -19,37 +19,49 @@ class Post extends Model
     ];
 
     // 投稿内容 ＿ユーザの関係
+    // ※一対多
     // 一つの投稿は一人の投稿者に属する
+    // 従→主
     public function user(){
         return $this->belongsTo('App\Models\Users\User');
     }
-    // 投稿内容＿コメントの関係※一対多
+    // 投稿内容＿コメントの関係
+    // ※一対多
     // 一つの投稿は多数のコメントを持ちうる
+    // 主→従
+    // コメント数はこのデータをカウントすればOK
     public function postComments(){
         return $this->hasMany('App\Models\Posts\PostComment');
     }
 
-    // ★中間テーブル
     // 投稿内容＿サブカテゴリの関係
-    // 多対多
+    // ※一対多
+    // 従→主
     public function subCategories(){
-        // リレーションの定義
-        // 投稿とサブカテゴリ―との中間テーブル
-        // 投稿＿サブカテゴリ
-        return $this->belongsToMany('App\Models\Posts\SubCategory', 'post_sub_categories','post_id','sub_category_id')->withPivot('id');
+        // 一つの投稿はある一つのカテゴリに属する
+        return $this->belongsTo('App\Models\Posts\SubCategory');
     }
 
+    // その投稿にいいねがどのくらいついているか？
     // 投稿＿いいねの関係
+    // usersテーブルとともに中間テーブルを構成する
     // 一つの投稿は多数のいいねを持ちうる
+    // favoriteテーブルの投稿のidを取り出す
+    // （これをカウントすることで投稿のいいね数をカウントする）
     public function likes()
     {
         return $this->hasMany(Favorite::class,'post_id');
     }
 
-    // コメント数カウント
+    // 投稿＿コメントに対するいいねの関係
     // post_commentテーブルのidの数を数える
-    public function commentCounts($post_id){
-        return Post::with('postComments')->find($post_id)->postComments();
-    }
+    // public function comment_likes(){
+    //     return $this->hasMany(PostCommentFavorite::class,'post_id');
+    // }
+
+    // postとコメントに対するいいねのテーブルでは直接の主従関係はない
+    // public function comment_likes($post_id){
+    //     return Post::with('postComments')->find($post_id)->postComments();
+    // }
 
 }

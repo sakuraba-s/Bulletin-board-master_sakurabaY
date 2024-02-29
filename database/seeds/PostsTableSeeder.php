@@ -16,6 +16,7 @@ class PostsTableSeeder extends Seeder
         Post::create([
         'user_id' => '1',
         'title'=> 'きょうのてんき',
+        'sub_category_id'=> '1',
         'post' => 'おはようきょうはいい天気ですね。いい一日になりますように。',
     ]);
     }

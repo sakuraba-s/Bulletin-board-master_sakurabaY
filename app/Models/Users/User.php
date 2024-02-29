@@ -22,26 +22,26 @@ class User extends Authenticatable implements  MustVerifyEmailContract
         'email',
         'password',
         'admin_role',
-        // カラムに値を挿入できるようにする
     ];
     // ユーザー＿投稿内容の関係
     // 一対多
+    // 主→従
     // ユーザに対して投稿は複数存在する
-    // このメソッドを呼び出すことでユーザ情報だけでなく東湖内容のデータも取得できる
     public function posts(){
         return $this->hasMany('App\Models\Posts\Post');
     }
 
-        // →ログイン中ユーザがその投稿をいいねしているかどうか
+    // →ログイン中ユーザはその投稿をいいねしている？
     // 「いいねした人のID」が認証中のユーザのID かつ
     // 「いいねした投稿のID」がその投稿のIDに一致する
+    // ※引数はビューから受け取っている
     public function is_Like($post_id){
-        return Favorite::where('user_id', Auth::id())->where('post_id', $post_id)->first(['post_favorites.id']);
+        return Like::where('user_id', Auth::id())->where('post_id', $post_id)->first(['likes.id']);
     }
 
     public function likePostId(){
         // いいねした人のIDが認証中のユーザIDに一致
-        return Favorite::where('user_id', Auth::id());
+        return Like::where('user_id', Auth::id());
     }
 
 }

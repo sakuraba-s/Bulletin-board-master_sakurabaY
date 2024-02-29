@@ -4,13 +4,13 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddForeignKeyPostCommentFavoritesTable extends Migration
+class AddForeignKeyPostCommentLikesTable extends Migration
 {
     public function up()
     {
         // 外部性制約　中間テーブル
         // コメントに対する「好き」の中間テーブルに対する外部制約の設定
-        Schema::table('post_comment_favorites', function (Blueprint $table) {
+        Schema::table('post_comment_likes', function (Blueprint $table) {
 
             $table->foreign('user_id')
                 ->references('id')
@@ -31,7 +31,7 @@ class AddForeignKeyPostCommentFavoritesTable extends Migration
 
     public function down()
     {
-        Schema::table('post_comment_favorites', function (Blueprint $table) {
+        Schema::table('post_comment_likes', function (Blueprint $table) {
             $table->dropForeign(['user_id']);
             $table->dropForeign(['post_comment_id']);
         });

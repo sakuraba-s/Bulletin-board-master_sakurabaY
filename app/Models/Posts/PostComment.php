@@ -17,4 +17,14 @@ class PostComment extends Model
         'event_at',
         'post_sub_category_id',
     ];
+
+    // コメント＿いいねの関係
+    // usersテーブルとともに中間テーブルを構成する
+    // 一つのコメントは多数のいいねを持ちうる
+    // favoriteテーブルの投稿のidを取り出す
+    // （これをカウントすることで投稿のいいね数をカウントする）
+    public function comment_likes()
+    {
+        return $this->hasMany(PostCommentFavorite::class,'post_comment_id');
+    }
 }
