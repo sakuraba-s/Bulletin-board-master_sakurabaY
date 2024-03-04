@@ -6,31 +6,24 @@
   <div class="post_view w-75 mt-5">
     <p class="w-75 m-auto">掲示板投稿一覧</p>
 
-    <!-- そもそも投稿内容が表示できていない(;'∀') -->
     <!-- 投稿内容を繰り返して表示 -->
     @foreach($posts as $post)
     <!-- コントローラの記述により、posts変数には絞り込まれた必要な投稿のデータが入っている -->
     <div class="post_area border w-75 m-auto p-3">
       <!-- ユーザ名 -->
       <!-- userメソッドが呼び出して、リレーション先の値を取得する -->
-      <p><span>{{ $post->user->name }}</span>さん</p>
+      <p><span>{{ $post->user->username }}</span>さん</p>
       <!-- 投稿時間 -->
-      <p><span>{{ $post->update_user_id}}</span>
+      <p><span>{{ $post->created_at}}</span>
       <!-- 閲覧数 -->
-
-
+      <!-- (;'∀')ここに閲覧数を表示 -->
       <!-- タイトル -->
-      <p class="bold"><a href="{{ route('post.detail', ['id' => $post->id]) }}">{{ $post->post_title }}</a></p>
+      <p class="bold"><a href="{{ route('post.detail', ['id' => $post->id]) }}">{{ $post->title }}</a></p>
       <!-- タイトルは詳細画面へリンクになっている -->
 
 
-      <!-- ここに問題あり？(;'∀') -->
-      <div class="post_bottom_area d-flex">
         <!-- サブカテゴリ -->
-        @foreach($post->subCategories as $subCategory)
-          <p><span class="category_btn">{{ $subCategory->sub_category }}</span></p>
-        @endforeach
-
+          <p><span class="category_btn">{{ $post->subCategory->sub_category }}</span></p>
 
           <!-- コメント数 -->
         <div class="d-flex post_status">
@@ -38,7 +31,6 @@
             <!-- Postモデルのメソッドを使用 -->
             <span class="">{{ $post->postComments ->count()}}</span>
           </div>
-
 
           <!-- いいね数 -->
           <!-- jsにて実装 -->
@@ -57,7 +49,6 @@
             @endif
           </div>
         </div>
-      </div>
     </div>
     @endforeach
   </div>

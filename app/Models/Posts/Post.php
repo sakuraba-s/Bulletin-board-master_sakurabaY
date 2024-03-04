@@ -37,8 +37,8 @@ class Post extends Model
     // 投稿内容＿サブカテゴリの関係
     // ※一対多
     // 従→主
-    public function subCategories(){
-        // 一つの投稿はある一つのカテゴリに属する
+    // 一つの投稿はある一つのカテゴリに属する
+    public function subCategory(){
         return $this->belongsTo('App\Models\Posts\SubCategory');
     }
 
