@@ -50,7 +50,7 @@ class Post extends Model
     // （これをカウントすることで投稿のいいね数をカウントする）
     public function likes()
     {
-        return $this->hasMany(Favorite::class,'post_id');
+        return $this->hasMany(Like::class,'post_id');
     }
 
     // 投稿＿コメントに対するいいねの関係

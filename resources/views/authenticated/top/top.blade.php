@@ -23,7 +23,7 @@
 
 
         <!-- サブカテゴリ -->
-          <p><span class="category_btn">{{ $post->subCategory->sub_category }}</span></p>
+        <p><span class="category_btn">{{ $post->subCategory->sub_category }}</span></p>
 
           <!-- コメント数 -->
         <div class="d-flex post_status">
