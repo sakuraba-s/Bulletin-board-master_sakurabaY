@@ -1,0 +1,680 @@
+@charset "utf-8";
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+/* body */
+.all_content{
+  background:#ECF1F6;
+}
+ul,
+li{
+  list-style:none;
+}
+
+/* サイドバー */
+.sidebar{
+  width:180px;
+  /* height:100vh; */
+  /* height:100%; */
+  background-color:#03AAD2;
+  font-weight:bold;
+  white-space: nowrap;
+  /* 折り返さない */
+}
+.main-container{
+  width:100%;
+}
+.sidebar p a{
+  color:#FFF;
+  padding-left: 10px;
+
+}
+
+/* トップページ */
+.user_status{
+  border-radius:10px;
+  background:#FFF;
+}
+
+/* スクール予約関連 */
+.day-blank{
+  background:#D3D3D3;
+}
+/* 土日の色を変える */
+.day-sat{
+  color:#0000FF;
+}
+.day-sun{
+  color:#FF0000;
+}
+
+/* 過去日をグレーにする */
+.past-day{
+  background:#EEE;
+}
+.calendar-td{
+  min-width:100px;
+}
+.day_part{
+  color:#494949;
+  font-size:12px;
+}
+.adjust-table{
+  width:70% !important;
+}
+.adjust-table td{
+  padding:0 !important;
+}
+.adjust-area p{
+  justify-content: space-around;
+}
+.adjust-table-btn{
+  width:70%;
+}
+
+
+/* キャンセルのモーダル */
+/* モーダル */
+.modal{
+    display: none;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+.modal__bg{
+    background: rgba(0,0,0,0.8);
+    height: 100vh;
+    position: absolute;
+    width: 100%;
+}
+.modal__content{
+    background: #fff;
+    left: 50%;
+    padding: 40px;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    width: 60%;
+}
+
+/* 掲示板 */
+.sub_categories{
+  display:none;
+}
+.post_create_area{
+  background:#FFF;
+  border-radius:10px;
+}
+.post_create_area textarea{
+  resize:none;
+  height:300px;
+  white-space: pre-wrap;
+}
+.detail_container{
+  background:#FFF;
+}
+.post_area{
+  background:#FFF;
+  border-radius:10px;
+}
+.post_area p:nth-child(1){
+  color: #ccc;
+}
+
+.post_bottom_area{
+  justify-content: space-between;
+}
+.like_btn,
+.un_like_btn{
+  cursor:pointer;
+}
+.un_like,
+.un_like_btn{
+  color:#E2254D;
+}
+.error_message{
+  font-size:12px;
+  color:red;
+}
+
+/* 掲示板 詳細画面 */
+.contributor{
+  font-size:12px;
+  color:#999;
+  font-weight:bold;
+  text-align: left;
+
+}
+.contributor p{
+  margin: 0px 0px 10px 0px;
+}
+
+.detsail_post_title{
+  font-size:14px;
+}
+.detsail_post{
+  font-size:12px;
+  color:#9E9E9E;
+}
+.detail_inner_head{
+  display:flex;
+  justify-content: space-between;
+}
+.edit-modal-open{
+  cursor:pointer;
+}
+.modal-inner-body textarea{
+  height:150px;
+  resize:none;
+}
+.edit-modal-btn{
+  justify-content: space-between;
+}
+/* 掲示板 コメント */
+.comment_container{
+  background:#FFF;
+}
+.comment_area p,
+.comment_area input{
+  font-size:12px;
+  font-weight:bold;
+}
+.comment_area textarea{
+  height:300px;
+  resize:none;
+}
+.comment_container span{
+  font-size:12px;
+}
+.post_status span{
+  font-size:12px;
+}
+
+/* 掲示板　カテゴリー */
+.category_area{
+  background:#FFF;
+  border-radius:10px;
+}
+.category_box{
+  border-radius:5px;
+  padding:3px;
+  background:#999;
+  font-size:10px;
+  color:#FFF;
+}
+.category_btn{
+  font-size:12px;
+  border-radius:5px;
+  padding:0 5px;
+  border:none;
+  /* background:#999; */
+  background-color:#03AAD2;
+  color:#FFF;
+}
+.main_categories span,
+.sub_categories li input{
+  list-style:none;
+  cursor:pointer;
+}
+
+/* ユーザー検索 */
+.reserve_users_area{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content: space-between;
+  align-content: first baseline;
+  width:1150px;
+  margin:10px auto;
+  /* height:100vh; */
+  overflow: scroll;
+  overflow-x: hidden;
+  /* padding:10px; */
+  padding:0px 40px 0px 40px;
+  /* 左右余白 */
+  background:transparent;
+  border-radius:5px;
+}
+.one_person{
+  background-color: #FFF;
+  border-radius: 10px;
+  box-shadow: 0px 6px 10px 0px rgba(97, 97, 97, 0.4);
+  /* offset-x | offset-y | blur-radius | spread-radius | color */
+  /* margin: 5px 10px 5px 10px; */
+  /* margin: 10px 0px 10px 0px; */
+  margin-bottom: 10px;
+  padding: 20px;
+  /* 内側余白 */
+}
+.one_person:nth-of-type(n+5){
+  margin-top: 20px;
+}
+
+.reserve_users_area span{
+  font-size:12px;
+}
+.one_person{
+  width:250px;
+  height:250px;
+}
+.search_conditions span{
+  cursor:pointer;
+}
+
+/* 選択科目の登録ボタン */
+.subject_edit_btn{
+  /* font-size:12px; */
+  color:#0000FF;
+  cursor:pointer;
+  display: block;
+  margin: 10px 0px 10px 0px;
+}
+/* ユーザ検索のハンバーガーメニュー */
+/*閉じた状態の矢印描画*/
+
+.subject_edit_btn:after{
+  border-right: solid 2px #0000FF;
+  border-top: solid 2px #0000FF;
+  content: "";
+  display: block;
+  width: 8px;
+  height: 8px;
+  position: relative;
+  left: 2%;
+  top: 10%;
+  margin: 8px 0px 8px 0px;
+  top: 38%;
+  transform: rotate(135deg);
+  transition: transform .3s ease-in-out, top .3s ease-in-out;
+  width: 8px;
+}
+.subject_edit_btn.open:after{
+  top: 10%;
+  transform: rotate(-45deg);
+  margin-bottom: 0;
+}
+.subject_inner{
+  display:none;
+}
+
+/* ログイン画面 */
+.shadow{
+  background-color: #FFF;
+  border-radius: 10px;
+  box-shadow: 0px 6px 10px 0px rgba(97, 97, 97, 0.4);
+  /* offset-x | offset-y | blur-radius | spread-radius | color */
+}
+
+img{
+  padding: 50px 0px 50px 0px;
+  width: 150px;
+  height: auto;
+}
+
+.pt-6{
+  padding-bottom: 20px;
+}
+
+.bold a{
+  color:inherit;
+  /* colorプロパティに指定している「inherit」は、親要素のCSSを継承する役割があります。 */
+  text-decoration: none;
+  font-weight:bold;
+}
+
+.mr-5 i{
+color: #9E9E9E;
+}
+.mr-5 span{
+color: #9E9E9E;
+}
+.mr-6 span{
+color: #9E9E9E;
+}
+.like_btn{
+color: #9E9E9E;
+}
+
+.post_btn{
+  border-radius:5px;
+  padding:10px 0px 10px 0px;
+  border:none;
+  background-color:#03AAD2;
+  text-align: center;
+}
+.post_btn input:nth-child(1){
+  text-align: left;
+  /* 左揃え */
+}
+
+.post_btn a {
+  color:#FFF;
+}
+
+.pink{
+  background-color:#d475a8;
+  color:#FFF;
+  border-radius:5px;
+  padding:10px;
+  border:none;
+  width: 49.5%;
+  margin-bottom: 20px;
+
+}
+.yellow{
+  background-color:#e6b83c;
+  color:#FFF;
+  border-radius:5px;
+  padding:10px;
+  border:none;
+  width: 49.5%;
+  margin-bottom: 20px;
+}
+
+.post_btn:nth-child( 2){
+  background-color: transparent;
+}
+
+.post_btn input{
+  -moz-appearance: none;
+	-webkit-appearance: none;
+	appearance: none;
+	background-color: transparent;
+	background-image: none;
+	border: 1px solid rgba(0, 0, 0, 0.16);
+	border-radius: 5px;
+	/* color: inherit; */
+	/* font-family: inherit; */
+	/* font-size: 1em; */
+  padding:10px 0px 10px 0px;
+  text-align: center;
+	width: 100%;
+}
+
+.post_btn input:nth-child(1){
+  width: 70%;
+	border-radius: 5px 0px 0px 5px;
+}
+.post_btn input:nth-child(2){
+  width: 30%;
+  background-color:#03AAD2;
+  color:#FFF;
+	border-radius: 0px 5px 5px 0px;
+  border: none;
+}
+
+.other_area a{
+  display: block;
+}
+.other_area a:hover{
+  text-decoration: none;
+}
+
+.acMenu dt{
+  position: relative;
+  border-bottom:#9E9E9E 1px solid;
+  cursor:pointer;
+  font-weight: normal;
+  padding: 12px 0px;
+  }
+
+/* サブカテゴリ */
+  .acMenu dd{
+  background:#f2f2f2;
+  line-height:50px;
+  display:none;
+  /* 初めは表示しない */
+  background-color: transparent;
+  position: relative;
+  }
+
+/* サブカテゴリ中身 */
+  .acMenu dd input{
+  margin-left: 20px;
+  border: none;
+  /* デフォルトの外枠を外す */
+  background-color: transparent;
+  border-bottom:#9E9E9E 1px solid;
+  width: 80%;
+  text-align: left;
+  }
+
+
+  .acMenu i {
+    transform: rotate(-90deg);
+    color: #1d1c1c;
+    font-weight: bolder;
+    /* フォントを少しだけ太くする */
+    background: transparent;
+    border: none;
+    margin-right: 10px;
+    margin-left: 20px;
+    /* ボタンに謎の枠線と背景色がついたので消す */
+}
+/* ハンバーガーメニューを押下すると上向きになる */
+
+/*閉じた状態の矢印描画*/
+.acMenu dt:after{
+  border-right: solid 2px #000000;
+  border-top: solid 2px #000000;
+  content: "";
+  display: block;
+  height: 8px;
+  position: absolute;
+  right: 25px;
+  top: 38%;
+  transform: rotate(135deg);
+  transition: transform .3s ease-in-out, top .3s ease-in-out;
+  width: 8px;
+}
+
+.acMenu dt.open:after{
+  top: 45%;
+  transform: rotate(-45deg);
+}
+
+
+/* 新規投稿ページ */
+.post_create_area .box{
+	border: 1px solid rgba(0, 0, 0, 0.16);
+  padding:10px 0px 10px 0px;
+	width: 100%;
+  height: 45px;
+}
+.post_create_area textarea{
+	border: 1px solid rgba(0, 0, 0, 0.16);
+  padding:10px 0px 10px 0px;
+	width: 100%;
+  height: 300px;
+}
+.category_area .box{
+	border: 1px solid rgba(0, 0, 0, 0.16);
+  padding:10px 0px 10px 0px;
+	width: 100%;
+  height: 45px;
+  margin: 5px 0px 5px 0px;
+}
+.comment_area .box{
+	border: 1px solid rgba(0, 0, 0, 0.16);
+  padding:10px 0px 10px 0px;
+	width: 100%;
+  height: 300px;
+  margin: 5px 0px 5px 0px;
+}
+.comment_area .btn{
+  display: block;
+  margin: 0 0 0 auto;
+}
+
+/* 投稿詳細ページ */
+.btn .red{
+  border: none;
+  background-color:#E2254D;
+}
+
+.modal.box{
+  border: 1px solid rgba(0, 0, 0, 0.16);
+  padding:10px 0px 10px 0px;
+	width: 100%;
+  height: 300px;
+  margin: 5px 0px 5px 0px;
+
+}
+
+/* モーダル */
+.modal__content input:nth-child(1){
+  -moz-appearance: none;
+	-webkit-appearance: none;
+	appearance: none;
+	border: 1px solid rgba(0, 0, 0, 0.16);
+  padding:5px;
+	width: 100%;
+}
+.modal__content textarea{
+  -moz-appearance: none;
+	-webkit-appearance: none;
+	appearance: none;
+	border: 1px solid rgba(0, 0, 0, 0.16);
+  padding:5px;
+	width: 100%;
+  height: 200px;
+}
+
+.btn-danger a{
+  color: inherit;
+  /* 親要素であるbtn-dangerの設定を継承させる */
+}
+
+
+
+/* ユーザ検索のハンバーガーメニュー */
+/*閉じた状態の矢印描画*/
+
+.search_conditions:after{
+  border-right: solid 2px #000000;
+  border-top: solid 2px #000000;
+  content: "";
+  display: block;
+  width: 8px;
+  height: 8px;
+  position: relative;
+  left: 5%;
+  top: 10%;
+  margin: 8px 0px 8px 0px;
+  top: 38%;
+  transform: rotate(135deg);
+  transition: transform .3s ease-in-out, top .3s ease-in-out;
+  width: 8px;
+
+}
+
+.search_conditions.open:after{
+  top: 10%;
+  transform: rotate(-45deg);
+  margin-bottom: 0;
+}
+
+.search_area h5{
+  margin: 8px 0px 8px 0px;
+}
+/* ユーザ検索エリア */
+
+.search_conditions_inner{
+  display:none;
+  background:transparent;
+  border-top:#9E9E9E 1px solid;
+}
+.search_conditions_inner .inner{
+  margin-top: 1.5rem;
+}
+
+.search_area .box{
+  border-radius:5px;
+  padding:3px;
+  background:#EEE;
+  color:#EEE;
+	width: 80%;
+  padding:10px 0px 10px 10px;
+  text-align: left;
+  margin-bottom: 20px;
+}
+.search_area select{
+  display: block;
+  border-radius:5px;
+  border: none;
+  padding:3px;
+  background:#EEE;
+	width: 120px;
+  padding:10px 0px 10px 0px;
+}
+.search_btn input{
+
+  background-color:#03AAD2;
+
+	background-image: none;
+	border:none;
+	border-radius: 5px;
+	color: #fff;
+  padding:10px 0px 10px 0px;
+  text-align: center;
+	width: 80%;
+}
+.reset input{
+  background-color: transparent;
+	border:none;
+	border-radius: 5px;
+	color:#03AAD2;
+  padding:10px 0px 10px 0px;
+  text-align: center;
+	width: 80%;
+}
+.search_box{
+  margin:20px 0px 10px 0px;
+}
+
+/* 予約詳細 */
+.reserve_list{
+  background-color: #ffffff;
+}
+
+.reserve_list{
+  width: 100%;
+}
+.reserve_list td{
+  padding: 10px 0px 10px 0px;
+}
+.reserve_list th{
+  padding: 10px 0px 10px 0px;
+}
+tr.data:nth-child(odd){
+  background: #d4ecf5;
+}
+tr.data:nth-child(even){
+  background: #ffffff;
+}
+.column{
+	background-color:#03AAD2;
+  color: #ffffff;
+}
+
+
+
+/* 白い外枠 */
+.bg-white{
+  padding:5px;
+  border-radius:10px;
+}
+
+/* 土日に色を付ける */
+/* .calendar-td:nth-of-type(6){
+  color: #4214c2;
+}
+.calendar-td:nth-of-type(7){
+  color: #c21414;
+}
+.calendar-td p:nth-of-type(2){
+  color: #000000;
+} */
+

@@ -8,6 +8,7 @@ use App\Http\Requests\MainCategoryFormRequest;
 use App\Http\Requests\SubCategoryFormRequest;
 // 使用するモデルのパス
 use App\Models\Posts\Post;
+use App\Models\Posts\Like;
 use App\Models\Posts\MainCategory;
 use App\Models\Posts\SubCategory;
 // フォームリクエストの読み込み
@@ -39,16 +40,17 @@ class PostsController extends Controller
             'user_id' => Auth::id(),
             'title' => $request->post_title,
             'post' => $request->post_body,
+            'sub_category_id' => $post_category_id,
             // nullが許されていないカラムには必ず値を入れること
         ]);
 
         // リレーション
         // 上記で新規登録したポストテーブルのidを取得しつつテーブルを取得
-        $post = Post::findOrFail($post_get->id);
-        // 投稿とサブカテゴリの紐づけ
-        $post->subCategories()->attach($post_category_id);
+        // $post = Post::findOrFail($post_get->id);
+        // // 投稿とサブカテゴリの紐づけ
+        // $post->subCategories()->attach($post_category_id);
 
-        return redirect()->route('post.show');
+        return redirect()->route('top');
     }
 
     // カテゴリ追加画面の表示
@@ -86,5 +88,41 @@ class PostsController extends Controller
         // ddd($id);
         SubCategory::findOrFail($id)->delete();
         return redirect()->route('category.create');
+    }
+    
+    // いいね機能
+    // 投稿にいいねをつける
+    public function postLike(Request $request){
+        // ログインユーザのIDを取得
+        $user_id = Auth::id();
+        // 該当の投稿のIDを取得
+        $post_id = $request->post_id;
+
+        // いいねをカウントするメソッドをニューする
+        // Likeモデル
+        $like = new Like;
+
+        // ライクテーブルに新たに登録する
+        ddd($user_id);
+        $like->user_id = $user_id;
+        $like->post_id = $post_id;
+        $like->save();
+        // レコードをDBに保存する
+
+        return response()->json();
+    }
+
+    // 投稿にいいねを解除する
+    public function postUnLike(Request $request){
+        $user_id = Auth::id();
+        $post_id = $request->post_id;
+
+        $like = new Like;
+
+        $like->where('user_id', $user_id)
+             ->where('post_id', $post_id)
+             ->delete();
+
+        return response()->json();
     }
 }

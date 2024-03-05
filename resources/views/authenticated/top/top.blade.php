@@ -31,20 +31,16 @@
             <!-- Postモデルのメソッドを使用 -->
             <span class="">{{ $post->postComments ->count()}}</span>
           </div>
-
           <!-- いいね数 -->
+          <?php var_dump ($post->likes)?>
           <!-- jsにて実装 -->
-          <!-- Postモデルのメソッドを使用 -->
-          <!-- post_idでポスト送信し、コントローラで受けとる
-          ※データベース上でいいねをつける外すの機能
-          ※いいね数の増減の機能js で使う -->
-          <!-- クラス名はjsから値を受け取る目印 -->
+          <!-- post_idでポスト送信し、コントローラで受けとる -->
           <div class="mr-6">
             @if(Auth::user()->is_Like($post->id))
-            <!-- ログインしているユーザがその投稿をいいねしている場合は赤いハート -->
+            <!-- ログインしているユーザがその投稿をいいねしている場合 -->
             <p class="m-0"><i class="fas fa-heart un_like_btn" post_id="{{ $post->id }}"></i><span class="like_counts{{ $post->id }}">{{ $post->likes->count() }}</span></p>
             @else
-            <!-- ログインしているユーザがその投稿をいいねしていない場合はグレーのハート -->
+            <!-- ログインしているユーザがその投稿をいいねしていない場合 -->
             <p class="m-0"><i class="fas fa-heart like_btn" post_id="{{ $post->id }}"></i><span class="like_counts{{ $post->id }}">{{ $post->likes->count() }}</span></p>
             @endif
           </div>
