@@ -37,10 +37,11 @@ Route::group(['middleware' => 'auth'], function(){
     // 新規投稿ページ表示
     // Route::get('top', 'User\Post\PostsController@input')->name('post.input');
 
-    // いいねをする
-    Route::post('/like/post/{id}', 'PostsController@postLike')->name('post.like');
+    // いいねをする※ajax経由 非同期通信！
+    Route::get('/like/post/{id}', 'Admin\Post\PostsController@postLike')->name('post.like');
     // いいねを解除する
-    Route::post('/unlike/post/{id}', 'PostsController@postUnLike')->name('post.unlike');
+    Route::get('/unlike/post/{id}', 'Admin\Post\PostsController@postUnLike')->name('post.unlike');
+    // カッコ部分に引き渡したいパラメータをセットする
 
     // 投稿詳細画面表示
     Route::get('top/{id}', 'Admin\Post\TopController@PostDetail')->name('post.detail');

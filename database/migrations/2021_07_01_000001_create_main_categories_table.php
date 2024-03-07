@@ -19,6 +19,7 @@ class CreateMainCategoriesTable extends Migration
             $table->integer('id')->autoIncrement()->comment('id');
             $table->string('main_category', 60)->index()->comment('メインカテゴリー');
             $table->timestamp('created_at')->nullable()->comment('登録日時');
+            $table->timestamp('updated_at')->default(DB::raw('current_timestamp on update current_timestamp'))->comment('更新日時');
         });
     }
 

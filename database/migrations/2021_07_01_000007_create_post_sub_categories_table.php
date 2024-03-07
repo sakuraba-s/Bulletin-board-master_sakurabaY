@@ -17,6 +17,7 @@ class CreatePostSubCategoriesTable extends Migration
             $table->integer('post_id')->index()->comment('投稿のid');
             $table->integer('sub_category_id')->index()->comment('サブカテゴリーid');
             $table->timestamp('created_at')->nullable()->comment('登録日時');
+            $table->timestamp('updated_at')->default(DB::raw('current_timestamp on update current_timestamp'))->comment('更新日時');
         });
     }
 

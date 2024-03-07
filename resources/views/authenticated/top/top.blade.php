@@ -19,6 +19,7 @@
       <!-- (;'∀')ここに閲覧数を表示 -->
       <!-- タイトル -->
       <p class="bold"><a href="{{ route('post.detail', ['id' => $post->id]) }}">{{ $post->title }}</a></p>
+      <p class="bold"><a href="{{ route('post.like', ['id' => $post->id]) }}">いいね</a></p>
       <!-- タイトルは詳細画面へリンクになっている -->
 
 
@@ -32,13 +33,14 @@
             <span class="">{{ $post->postComments ->count()}}</span>
           </div>
           <!-- いいね数 -->
-          <?php var_dump ($post->likes)?>
           <!-- jsにて実装 -->
           <!-- post_idでポスト送信し、コントローラで受けとる -->
           <div class="mr-6">
             @if(Auth::user()->is_Like($post->id))
             <!-- ログインしているユーザがその投稿をいいねしている場合 -->
             <p class="m-0"><i class="fas fa-heart un_like_btn" post_id="{{ $post->id }}"></i><span class="like_counts{{ $post->id }}">{{ $post->likes->count() }}</span></p>
+            <!-- iタグで囲った部分にいいねアイコンを設置 -->
+            <!-- 続いてjsに送信するデータを記述 -->
             @else
             <!-- ログインしているユーザがその投稿をいいねしていない場合 -->
             <p class="m-0"><i class="fas fa-heart like_btn" post_id="{{ $post->id }}"></i><span class="like_counts{{ $post->id }}">{{ $post->likes->count() }}</span></p>

@@ -92,37 +92,37 @@ class PostsController extends Controller
     
     // いいね機能
     // 投稿にいいねをつける
-    public function postLike(Request $request){
-        // ログインユーザのIDを取得
+    public function postLike($id){
+        // get送信した投稿のidを取得する
         $user_id = Auth::id();
-        // 該当の投稿のIDを取得
-        $post_id = $request->post_id;
+        $post_id = $id;
+
+        // ddd($post_id);
 
         // いいねをカウントするメソッドをニューする
         // Likeモデル
         $like = new Like;
 
         // ライクテーブルに新たに登録する
-        ddd($user_id);
         $like->user_id = $user_id;
         $like->post_id = $post_id;
         $like->save();
         // レコードをDBに保存する
-
         return response()->json();
+        // jsに結果を戻す
+        // return redirect()->route('top');
     }
 
     // 投稿にいいねを解除する
-    public function postUnLike(Request $request){
+    public function postUnLike($id){
         $user_id = Auth::id();
-        $post_id = $request->post_id;
+        $post_id = $id;
 
         $like = new Like;
-
         $like->where('user_id', $user_id)
              ->where('post_id', $post_id)
              ->delete();
-
         return response()->json();
+        // jsに結果を戻す
     }
 }
