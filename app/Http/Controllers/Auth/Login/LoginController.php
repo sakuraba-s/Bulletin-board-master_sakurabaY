@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('guest')->except('logout');
+    }
         // ログイン画面
         public function showLoginForm()
         {
@@ -33,6 +38,12 @@ class LoginController extends Controller
          // 失敗すればログイン画面へ遷移させる
 
         }
+        }
+
+        // ログアウト
+        public function logout(){
+            Auth::logout();
+            return redirect('/login');
         }
     //
 }

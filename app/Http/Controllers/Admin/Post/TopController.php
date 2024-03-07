@@ -44,7 +44,7 @@ class TopController extends Controller
                     // いずれかヒットしたものを取得する
                     $sub_category = $request->keyword;
                     // サブカテゴリの完全一致の検索のためにこれだけ変数を用意しておく
-                    $posts = Post::with('user','postComments','subCategories')
+                    $posts = Post::with('user','postComments','subCategory')
                         // リレーションを定義した3つのメソッドとともにポストテーブルを呼び出す
                         // ユーザ情報、コメント数カウント、サブカテゴリ　　いいね数？？(;'∀')
                         //以下でそれらを任意の条件で絞り込む
@@ -52,7 +52,7 @@ class TopController extends Controller
                         //  投稿のタイトルが入力されたキーワードにあいまい検索で一致する場合
                         ->orWhere('post', 'like', '%'.$request->keyword.'%')
                         // または投稿内容が入力されたキーワードに完全一致する場合
-                        ->orwhereHas('subCategories',function($q)use($sub_category){
+                        ->orwhereHas('subCategory',function($q)use($sub_category){
                             $q->where('sub_category', '=', $sub_category);
                             } ) ->get();
                         // またはサブカテゴリが入力されたキーワードに完全一致する場合
@@ -64,9 +64,9 @@ class TopController extends Controller
                 // 検索ワード サブカテゴリ完全一致
                 $sub_category = $request->category_word;
                 // echo ddd($sub_category);
-                $posts = Post::with('user', 'postComments','subCategories')
+                $posts = Post::with('user', 'postComments','subCategory')
                 // リレーションを定義した3つのメソッドとともにポストテーブルを呼び出す
-                ->whereHas('subCategories',function($q)use($sub_category){
+                ->whereHas('subCategory',function($q)use($sub_category){
                 $q->where('sub_category', '=', $sub_category);
                 } )->get();
                 // サブカテゴリが入力されたキーワードに完全一致する場合
@@ -85,14 +85,14 @@ class TopController extends Controller
             // または自分の投稿のみをソート
             }else if($request->my_posts){
                 // 「自分の投稿」をクリックしたという情報を取得
-                $posts = Post::with('user', 'postComments','subCategories')
+                $posts = Post::with('user', 'postComments','subCategory')
                 // リレーションを定義した3つのメソッドとともにポストテーブルを呼び出す
                 ->where('user_id', Auth::id()) ->get();
                 // 投稿者のユーザIDがログイン中のユーザIDに一致するものを取得
             }
             // ddd($posts);
             // 結果をビュー側に渡す
-            // ddd($posts->subCategories );
+            // ddd($posts->subCategory );
             return view('authenticated.top.top', compact('posts', 'categories', 'like', 'post_comment'));
             //posts変数→冒頭で取得したポストテーブルのデータ、または絞り込みで絞られた投稿のデータ
             // categories変数→冒頭で取得したカテゴリ一覧のデータ（カテゴリ検索」の欄用）
