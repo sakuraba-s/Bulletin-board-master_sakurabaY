@@ -100,10 +100,10 @@ class TopController extends Controller
             // post_comment変数→　冒頭でインスタンス化したやつ　(;'∀')
         }
 
-
         // 詳細画面
         public function postDetail($post_id){
-            $post = Post::with('user', 'postComments')->findOrFail($post_id);
+            // 投稿のidはGET送信で受け取る
+            $post = Post::with(['user', 'postComments'])->findOrFail($post_id);
             return view('authenticated.bulletinboard.post_detail', compact('post'));
         }
 

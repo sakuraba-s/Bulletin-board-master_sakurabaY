@@ -19,7 +19,7 @@
       <!-- (;'∀')ここに閲覧数を表示 -->
       <!-- タイトル -->
       <p class="bold"><a href="{{ route('post.detail', ['id' => $post->id]) }}">{{ $post->title }}</a></p>
-      <p class="bold"><a href="{{ route('post.like', ['id' => $post->id]) }}">いいね</a></p>
+      <!-- postのidをGET送信で送る -->
       <!-- タイトルは詳細画面へリンクになっている -->
 
 

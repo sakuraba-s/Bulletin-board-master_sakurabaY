@@ -3,6 +3,8 @@
 namespace App\Models\Posts;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Users\User;
+
 
 class PostComment extends Model
 {
@@ -27,4 +29,13 @@ class PostComment extends Model
     {
         return $this->hasMany(PostCommentFavorite::class,'post_comment_id');
     }
+    // コメントとユーザの関係
+    // コメントをしたユーザの「名前」を取得
+    public function commentUser($user_id){
+        return User::where('id', $user_id)->first();
+    }
+    // public function commentUser(){
+    //     return $this->belongsTo('App\Models\Users\User');
+
+    // }
 }

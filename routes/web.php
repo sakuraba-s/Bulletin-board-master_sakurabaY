@@ -44,11 +44,17 @@ Route::group(['middleware' => 'auth'], function(){
     // カッコ部分に引き渡したいパラメータをセットする
 
     // 投稿詳細画面表示
-    Route::get('top/{id}', 'Admin\Post\TopController@PostDetail')->name('post.detail');
+    Route::get('/bulletin_board/detail/{id}', 'Admin\Post\TopController@PostDetail')->name('post.detail');
     // 投稿画面表示
     Route::get('/bulletin_board/input', 'Admin\Post\PostsController@postInput')->name('post.input');
     // 投稿機能
     Route::post('/bulletin_board/create', 'Admin\Post\PostsController@postCreate')->name('post.create');
+    // 投稿の編集
+    Route::post('/bulletin_board/edit', 'Admin\Post\PostsController@postEdit')->name('post.edit');
+    // 削除
+    Route::get('/bulletin_board/delete/{id}', 'Admin\Post\PostsController@postDelete')->name('post.delete');
+    // コメント投稿
+    Route::post('/comment/create', 'Admin\Post\PostsController@commentCreate')->name('comment.create');
 
     // カテゴリ追加画面表示
     Route::get('/bulletin_board/category', 'Admin\Post\PostsController@categoryCreate')->name('category.create');

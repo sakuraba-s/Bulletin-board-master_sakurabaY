@@ -1,81 +1,73 @@
-@extends('layouts.sidebar')
+@extends('layouts.app')
 @section('content')
 <div class="vh-100 d-flex">
   <div class="w-50 mt-5">
     <div class="m-3 detail_container">
       <div class="p-3">
-        <div class="detail_inner_head">
-          <div>
-          <div>
-            <!-- バリデーション -->
-            @if($errors->first('post_title'))
-            <span class="error_message">{{ $errors->first('post_title') }}</span>
-            @endif
-            @if($errors->first('post_body'))
-            <span class="error_message">{{ $errors->first('post_body') }}</span>
-            @endif
+
+          <!-- 投稿の表示 -->
+          <div class="contributor d-flex">
+            <span>{{ $post->user->username }}</span>さん
+            <span class="ml-5">{{ $post->created_at }}</span>
           </div>
+          <div class="contributor d-flex">
+            <div class="detsail_post_title">{{ $post->title }}</div>
+                <!-- ログインユーザのみ表示 削除ボタン編集ボタン-->
+                @if(Auth::user()->id === $post->user_id)
+                  <span class="edit-modal-open btn btn-primary" post_title="{{ $post->title }}" post_body="{{ $post->post }}" post_id="{{ $post->id }}">編集</span>
+                  <!-- 削除してもよろしいですか？を表示 -->
+                  <span class="btn btn-primary  btn-danger"><a href="{{ route('post.delete', ['id' => $post->id]) }} "onclick="return confirm('削除してよろしいですか？');">削除</a></span>
+                @endif
+          </div>
+          <div class="mt-3 detsail_post">{{ $post->post }}</div>
+
+          <div>
             <!-- サブカテゴリ -->
-            @foreach($post->subCategories as $subCategory)
-            <p><span class="category_btn">{{ $subCategory->sub_category }}</span></p>
-            @endforeach
+            <p><span class="category_btn">{{ $post->subCategory->sub_category }}</span></p>
+            <!-- バリデーション -->
+            <div>
+              @if($errors->first('title'))
+              <span class="error_message">{{ $errors->first('title') }}</span>
+              @endif
+              @if($errors->first('post_body'))
+              <span class="error_message">{{ $errors->first('post_body') }}</span>
+              @endif
+            </div>
           </div>
 
-          <!-- ログインユーザのみ表示 -->
-          @if(Auth::user()->id === $post->user_id)
-          <div>
-            <span class="edit-modal-open btn btn-primary" post_title="{{ $post->post_title }}" post_body="{{ $post->post }}" post_id="{{ $post->id }}">編集</span>
-            <!-- 削除してもよろしいですか？を表示 -->
-            <span class="btn btn-primary  btn-danger"><a href="{{ route('post.delete', ['id' => $post->id]) }} "onclick="return confirm('削除してよろしいですか？');">削除</a></span>
-          </div>
-          @endif
-
-        </div>
-
-        <div class="contributor d-flex">
-          <span class="ml-5">{{ $post->created_at }}</span>
-          <p>
-            <span>{{ $post->user->over_name }}</span>
-            <span>{{ $post->user->under_name }}</span>
-            さん
-          </p>
-          <span class="ml-5">{{ $post->created_at }}</span>
-        </div>
-        <div class="detsail_post_title">{{ $post->post_title }}</div>
-        <div class="mt-3 detsail_post">{{ $post->post }}</div>
-      </div>
-      <div class="p-3">
+          <!-- コメントを取得 Postテーブル→Post_commentテーブル→Userテーブル-->
         <div class="comment_container">
-          <span class="">コメント</span>
+          <p class="">コメント</p>
           @foreach($post->postComments as $comment)
-          <div class="comment_area border-top">
-            <p>
-              <span>{{ $comment->commentUser($comment->user_id)->over_name }}</span>
-              <span>{{ $comment->commentUser($comment->user_id)->under_name }}</span>さん
-            </p>
+          <!-- 投稿にリレーションされたコメントデータを取得 -->
+            <span>{{ $comment->commentUser($comment->user_id)->username }}</span>
+            <!-- リレーション先のリレーション先の値を取るにはモデルで検索をしてfirstで値を取得する -->
+            <!-- commentUser()でモデルにユーザidを引き渡す -->
             <p>{{ $comment->comment }}</p>
-          </div>
           @endforeach
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="w-50 p-3">
-    <div class="comment_container border m-5">
-      <div class="comment_area p-3">
-        <!-- バリデーション -->
-        @if($errors->first('comment'))
-        <span class="error_message">{{ $errors->first('comment') }}</span>
-        @endif
-        <p class="m-0">コメントする</p>
 
-        <textarea class="w-100 box" name="comment" form="commentRequest">        </textarea>
-        <input type="hidden" name="post_id" form="commentRequest" value="{{ $post->id }}">
-        <input type="submit" class="btn btn-primary" form="commentRequest" value="投稿">
-        <form action="{{ route('comment.create') }}" method="post" id="commentRequest">{{ csrf_field() }}</form>
+
+          <!-- コメント投稿 -->
+          <div class="w-50 p-3">
+            <div class="comment_container border m-5">
+                <!-- コメントのバリデーション -->
+                @if($errors->first('comment'))
+                <span class="error_message">{{ $errors->first('comment') }}</span>
+                @endif
+
+                <form action="{{ route('comment.create') }}" method="post">
+                  <input type="hidden" name="post_id" value="{{ $post->id }}">
+                  <input type="text" class="w-100 box" name="comment">
+                  <input type="submit" class="btn btn-primary" value="コメントする">
+                @csrf
+                </form>
+
+            </div>
+          </div>
       </div>
-    </div>
+
   </div>
+
 </div>
 
 <!-- 編集のモーダル機能 -->

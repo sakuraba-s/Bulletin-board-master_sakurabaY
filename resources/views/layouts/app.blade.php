@@ -28,21 +28,20 @@
 </head>
 <body>
     <div id="app">
+        <!-- ナビゲーション -->
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
+                <!-- lalavelの文字をヘッダーに表示 -->
                 <a class="navbar-brand" href="{{ url('top') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
-
-
-                <!-- ログアウトボタン -->
-            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-            {{ __('Logout') }}
-            </a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                @csrf
-            </form>
-
+            <!-- ログアウトボタン -->
+                @auth
+                    <form action="{{ route('logout') }}" method="post">
+                    @csrf
+                    <input type="submit" value="ログアウト">
+                    </form>
+                @endauth
         </div>
         </nav>
 

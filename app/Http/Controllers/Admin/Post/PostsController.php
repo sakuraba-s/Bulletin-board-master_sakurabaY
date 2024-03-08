@@ -6,9 +6,12 @@ namespace App\Http\Controllers\Admin\Post;
 use App\Http\Requests\PostFormRequest;
 use App\Http\Requests\MainCategoryFormRequest;
 use App\Http\Requests\SubCategoryFormRequest;
+use App\Http\Requests\CommentFormRequest;
+use App\Http\Requests\EditFormRequest;
 // 使用するモデルのパス
 use App\Models\Posts\Post;
 use App\Models\Posts\Like;
+use App\Models\Posts\PostComment;
 use App\Models\Posts\MainCategory;
 use App\Models\Posts\SubCategory;
 // フォームリクエストの読み込み
@@ -120,9 +123,36 @@ class PostsController extends Controller
 
         $like = new Like;
         $like->where('user_id', $user_id)
-             ->where('post_id', $post_id)
-             ->delete();
+            ->where('post_id', $post_id)
+            ->delete();
         return response()->json();
         // jsに結果を戻す
+    }
+
+
+    // 投稿削除
+    public function postDelete($id){
+        Post::findOrFail($id)->delete();
+        return redirect()->route('top');
+    }
+    // 投稿編集
+    // バリデーションをかませる
+    public function postEdit(EditFormRequest $request){
+        Post::where('id', $request->post_id)->update([
+            'title' => $request->post_title,
+            'post' => $request->post_body,
+        ]);
+        return redirect()->route('post.detail', ['id' => $request->post_id]);
+    }
+
+    // コメント投稿
+    // バリデーションをかませる
+    public function commentCreate(CommentFormRequest $request){
+        PostComment::create([
+            'post_id' => $request->post_id,
+            'user_id' => Auth::id(),
+            'comment' => $request->comment
+        ]);
+        return redirect()->route('post.detail', ['id' => $request->post_id]);
     }
 }
