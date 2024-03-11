@@ -51,8 +51,6 @@
     @endforeach
   </div>
 
-
-
   <div class="other_area border w-25">
     <div class="border m-4">
       <!-- カテゴリ追加画面へ -->

@@ -155,4 +155,12 @@ class PostsController extends Controller
         ]);
         return redirect()->route('post.detail', ['id' => $request->post_id]);
     }
+    // コメント編集
+    // バリデーションをかませる
+    public function commentEdit(CommentFormRequest $request){
+        PostComment::where('id', $request->comment_id)->update([
+            'comment' => $request->comment
+        ]);
+        return redirect()->route('post.detail', ['id' => $request->post_id]);
+    }
 }

@@ -14,7 +14,7 @@
             <div class="detsail_post_title">{{ $post->title }}</div>
                 <!-- ログインユーザのみ表示 削除ボタン編集ボタン-->
                 @if(Auth::user()->id === $post->user_id)
-                  <span class="edit-modal-open btn btn-primary" post_title="{{ $post->title }}" post_body="{{ $post->post }}" post_id="{{ $post->id }}">編集</span>
+                  <span class="edit-modal-open btn btn-primary" post_title="{{ $post->title }}" post_body="{{ $post->post }}" post_id="{{ $post->id }}" sub_category_id="{{ $post->sub_category_id }}" sub_categories="{{ $post->subCategory}}">編集</span>
                   <!-- 削除してもよろしいですか？を表示 -->
                   <span class="btn btn-primary  btn-danger"><a href="{{ route('post.delete', ['id' => $post->id]) }} "onclick="return confirm('削除してよろしいですか？');">削除</a></span>
                 @endif
@@ -43,6 +43,11 @@
             <span>{{ $comment->commentUser($comment->user_id)->username }}</span>
             <!-- リレーション先のリレーション先の値を取るにはモデルで検索をしてfirstで値を取得する -->
             <!-- commentUser()でモデルにユーザidを引き渡す -->
+              <!-- コメントの編集モーダルを開く -->
+              @if(Auth::user()->id === $comment->user_id)
+                    <span class="comment-edit-modal-open btn btn-primary" comment="{{ $comment->comment }}" comment_id="{{ $comment->id }}" post_id="{{ $comment->post_id }}">編集</span>
+              @endif
+            <p><span>{{ $comment->created_at}}</span>
             <p>{{ $comment->comment }}</p>
           @endforeach
 
@@ -70,7 +75,9 @@
 
 </div>
 
-<!-- 編集のモーダル機能 -->
+
+
+<!-- 投稿の編集のモーダル機能 -->
 <div class="modal js-modal">
   <div class="modal__bg js-modal-close"></div>
   <div class="modal__content">
@@ -79,6 +86,14 @@
         <div class="w-100">
 
           <!-- jQueryでモーダルへ受け渡した値を当てはまる 目印は name -->
+          <!-- サブカテゴリ -->
+          <select class="modal-inner-category w-50 m-auto box">
+          @foreach($sub_categories as $sub_category)
+            <option value="" placeholder="サブカテゴリ"></option>
+          @endforeach
+
+          </select>
+
           <!-- タイトル -->
           <div class="modal-inner-title w-50 m-auto box">
             <input type="text" name="post_title" placeholder="タイトル" class="w-100">
@@ -93,6 +108,35 @@
           <div class="w-50 m-auto edit-modal-btn d-flex">
             <a class="js-modal-close btn btn-danger d-inline-block" href="">閉じる</a>
             <input type="hidden" class="edit-modal-hidden" name="post_id" value="">
+            <!-- value部分にjQueryでモーダルへ受け渡した値を当てはめる -->
+            <!-- <input type="hidden" class="edit-modal-hidden" name="post_title" value="">
+            <input type="hidden" class="edit-modal-hidden" name="post_body" value=""> -->
+            <input type="submit" class="btn btn-primary d-block" value="編集">
+          </div>
+        </div>
+          {{ csrf_field() }}
+    </form>
+  </div>
+</div>
+<!-- コメントの編集のモーダル機能 -->
+<div class="modal js-comment-modal">
+  <div class="modal__bg js-modal-close"></div>
+  <div class="modal__content">
+    <!-- <form action="{{ route('post.edit') }}" method="post"> -->
+    <form action="{{ route('comment.edit') }}" method="post">
+        <div class="w-100">
+          <!-- jQueryでモーダルへ受け渡した値を当てはまる 目印は name -->
+          <!-- 本文 -->
+          <div class="modal-inner-body w-50 m-auto pt-3 pb-3 box">
+            <textarea name="comment" class="w-100"></textarea>
+          </div>
+
+          <!-- 更新する投稿のidをhiddenで送信 -->
+          <div class="w-50 m-auto edit-modal-btn d-flex">
+            <a class="js-modal-close btn btn-danger d-inline-block" href="">閉じる</a>
+
+            <input type="hidden" class="comment-modal-hidden" name="comment_id" value="">
+            <input type="hidden" class="post-modal-hidden" name="post_id" value="">
             <!-- value部分にjQueryでモーダルへ受け渡した値を当てはめる -->
             <!-- <input type="hidden" class="edit-modal-hidden" name="post_title" value="">
             <input type="hidden" class="edit-modal-hidden" name="post_body" value=""> -->
