@@ -24,7 +24,7 @@ class PostFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'post_category_id' => 'required|exists:main_categories,id',
+            'post_category_id' => 'required|exists:sub_categories,id',
             'post_title' => 'required|string|min:4|max:100',
             'post_body' => 'required|string|min:10|max:5000',
         ];
@@ -34,7 +34,6 @@ class PostFormRequest extends FormRequest
         return [
             'post_category_id.required' => '※カテゴリは必須',
             'post_category_id.exists' => '※存在しないメインカテゴリです',
-
             'post_title.required' => '※タイトルを入力してください。',
             'post_title.min' => '※タイトルは4文字以上入力してください。',
             'post_title.max' => '※タイトルは100文字以内で入力してください。',

@@ -104,7 +104,8 @@ class TopController extends Controller
         public function postDetail($post_id){
             // 投稿のidはGET送信で受け取る
             $post = Post::with(['user', 'postComments'])->findOrFail($post_id);
-            return view('authenticated.bulletinboard.post_detail', compact('post'));
+            $sub_categories=SubCategory::get();
+            return view('authenticated.bulletinboard.post_detail', compact('post','sub_categories'));
         }
 
     public function logout(){

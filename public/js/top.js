@@ -74,10 +74,9 @@ $(function () {
       var post_body = $(this).attr('post_body');
       var post_id = $(this).attr('post_id');
       var sub_category_id = $(this).attr('sub_category_id');
-      var sub_categories = $(this).attr('subCategory');
-      // サブカテゴリテーブルのデータが欲しい(;'∀')
-      $('.modal-inner-category option').val(sub_category_id);
+      var sub_categories = $(this).attr('sub_categories');
       $('.modal-inner-category').val(sub_categories);
+      $('.modal-inner-category').val(sub_category_id);
       $('.modal-inner-title input').val(post_title);
       $('.modal-inner-body textarea').text(post_body);
       $('.edit-modal-hidden').val(post_id);

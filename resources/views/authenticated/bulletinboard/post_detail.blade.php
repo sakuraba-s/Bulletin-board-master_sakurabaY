@@ -12,10 +12,13 @@
           </div>
           <div class="contributor d-flex">
             <div class="detsail_post_title">{{ $post->title }}</div>
+
+          <?php echo($post->sub_category_id)?>
+
+
                 <!-- ログインユーザのみ表示 削除ボタン編集ボタン-->
                 @if(Auth::user()->id === $post->user_id)
-                  <span class="edit-modal-open btn btn-primary" post_title="{{ $post->title }}" post_body="{{ $post->post }}" post_id="{{ $post->id }}" sub_category_id="{{ $post->sub_category_id }}" sub_categories="{{ $post->subCategory}}">編集</span>
-                  <!-- 削除してもよろしいですか？を表示 -->
+                  <span class="edit-modal-open btn btn-primary" post_title="{{ $post->title }}" post_body="{{ $post->post }}" post_id="{{ $post->id }}" sub_category_id="{{ $post->sub_category_id }}" sub_categories="{{ $sub_categories}}">編集</span>
                   <span class="btn btn-primary  btn-danger"><a href="{{ route('post.delete', ['id' => $post->id]) }} "onclick="return confirm('削除してよろしいですか？');">削除</a></span>
                 @endif
           </div>
@@ -88,11 +91,14 @@
           <!-- jQueryでモーダルへ受け渡した値を当てはまる 目印は name -->
           <!-- サブカテゴリ -->
           <select class="modal-inner-category w-50 m-auto box">
-          @foreach($sub_categories as $sub_category)
-            <option value="" placeholder="サブカテゴリ"></option>
-          @endforeach
+              @foreach($sub_categories as $sub_category)
+                <option value="$sub_category->id" >{{ $sub_category->sub_category}}</option>
+        
 
+              @endforeach
           </select>
+
+          <!-- valueは送信したときに渡すデータ その次に描いてあるのが画面に表示させたい文字-->
 
           <!-- タイトル -->
           <div class="modal-inner-title w-50 m-auto box">
