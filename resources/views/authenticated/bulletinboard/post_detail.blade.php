@@ -11,10 +11,10 @@
             <span class="ml-5">{{ $post->created_at }}</span>
           </div>
           <div class="contributor d-flex">
-            <div class="detsail_post_title">{{ $post->title }}</div>
-
+            <div class="detsail_post_title">{{ $post->title }}
           <?php echo($post->sub_category_id)?>
 
+            </div>
 
                 <!-- ログインユーザのみ表示 削除ボタン編集ボタン-->
                 @if(Auth::user()->id === $post->user_id)
@@ -92,8 +92,10 @@
           <!-- サブカテゴリ -->
           <select class="modal-inner-category w-50 m-auto box">
               @foreach($sub_categories as $sub_category)
-                <option value="$sub_category->id" >{{ $sub_category->sub_category}}</option>
-        
+                <option value="$sub_category->id" >
+                  {{ $sub_category->sub_category}}
+                <?php echo($post->sub_category_id)?> @if($sub_category->id==$post->sub_category_id) selected @endif
+                </option>
 
               @endforeach
           </select>
@@ -133,6 +135,7 @@
         <div class="w-100">
           <!-- jQueryでモーダルへ受け渡した値を当てはまる 目印は name -->
           <!-- 本文 -->
+          
           <div class="modal-inner-body w-50 m-auto pt-3 pb-3 box">
             <textarea name="comment" class="w-100"></textarea>
           </div>
