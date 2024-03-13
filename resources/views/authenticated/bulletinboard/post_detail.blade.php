@@ -90,13 +90,13 @@
 
           <!-- jQueryでモーダルへ受け渡した値を当てはまる 目印は name -->
           <!-- サブカテゴリ -->
-          <select class="modal-inner-category w-50 m-auto box">
+          <select class="modal-inner-category w-100 m-auto box" name="sub_category_id">
               @foreach($sub_categories as $sub_category)
-                <option value="$sub_category->id" >
-                  {{ $sub_category->sub_category}}
-                <?php echo($post->sub_category_id)?> @if($sub_category->id==$post->sub_category_id) selected @endif
+              <!-- 変数「sub_categories」はコントローラからビューに渡しているので（モーダル内でも）使える -->
+                <option value="{{$sub_category->id}}"
+                @if($sub_category->id==$post->sub_category_id) selected @endif>
+                {{ $sub_category->sub_category}}
                 </option>
-
               @endforeach
           </select>
 

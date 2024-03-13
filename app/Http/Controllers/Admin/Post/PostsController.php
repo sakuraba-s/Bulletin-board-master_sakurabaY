@@ -141,6 +141,7 @@ class PostsController extends Controller
         Post::where('id', $request->post_id)->update([
             'title' => $request->post_title,
             'post' => $request->post_body,
+            'sub_category_id' => $request->sub_category_id,
         ]);
         return redirect()->route('post.detail', ['id' => $request->post_id]);
     }
