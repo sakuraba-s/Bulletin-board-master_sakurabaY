@@ -164,4 +164,9 @@ class PostsController extends Controller
         ]);
         return redirect()->route('post.detail', ['id' => $request->post_id]);
     }
+    // コメント削除
+    public function commentDelete($id,$post_id){
+        PostComment::findOrFail($id)->delete();
+        return redirect()->route('post.detail', [$post_id]);
+    }
 }

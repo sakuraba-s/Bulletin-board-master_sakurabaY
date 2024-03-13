@@ -63,7 +63,6 @@ $(function () {
       }).done(function (res) {
         $('.like_counts' + post_id).text(countInt - 1);
       }).fail(function () {
-  
       });
     });
 

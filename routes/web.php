@@ -57,6 +57,8 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('/comment/create', 'Admin\Post\PostsController@commentCreate')->name('comment.create');
     // コメントの編集
     Route::post('/comment/edit', 'Admin\Post\PostsController@commentEdit')->name('comment.edit');
+    // コメント削除
+    Route::get('/comment/delete/{id}/{post_id}', 'Admin\Post\PostsController@commentDelete')->name('comment.delete');
 
     // カテゴリ追加画面表示
     Route::get('/bulletin_board/category', 'Admin\Post\PostsController@categoryCreate')->name('category.create');

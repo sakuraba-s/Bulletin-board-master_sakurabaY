@@ -8,7 +8,7 @@
           <!-- 投稿の表示 -->
           <div class="contributor d-flex">
             <span>{{ $post->user->username }}</span>さん
-            <span class="ml-5">{{ $post->created_at }}</span>
+            <span class="ml-5">{{ $post->updated_at }}</span>
           </div>
           <div class="contributor d-flex">
             <div class="detsail_post_title">{{ $post->title }}
@@ -48,9 +48,10 @@
             <!-- commentUser()でモデルにユーザidを引き渡す -->
               <!-- コメントの編集モーダルを開く -->
               @if(Auth::user()->id === $comment->user_id)
-                    <span class="comment-edit-modal-open btn btn-primary" comment="{{ $comment->comment }}" comment_id="{{ $comment->id }}" post_id="{{ $comment->post_id }}">編集</span>
+                <span class="comment-edit-modal-open btn btn-primary" comment="{{ $comment->comment }}" comment_id="{{ $comment->id }}" post_id="{{ $comment->post_id }}">編集</span>
+                <span class="btn btn-primary  btn-danger"><a href="{{ route('comment.delete', ['id' => $comment->id,'post_id' => $post->id]) }} "onclick="return confirm('削除してよろしいですか？');">削除</a></span>
               @endif
-            <p><span>{{ $comment->created_at}}</span>
+            <p><span>{{ $comment->updated_at}}</span>
             <p>{{ $comment->comment }}</p>
           @endforeach
 
