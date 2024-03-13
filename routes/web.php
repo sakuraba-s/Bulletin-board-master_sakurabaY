@@ -42,7 +42,6 @@ Route::group(['middleware' => 'auth'], function(){
     // いいねを解除する
     Route::get('/unlike/post/{id}', 'Admin\Post\PostsController@postUnLike')->name('post.unlike');
     // カッコ部分に引き渡したいパラメータをセットする
-
     // 投稿詳細画面表示
     Route::get('/bulletin_board/detail/{id}', 'Admin\Post\TopController@PostDetail')->name('post.detail');
     // 投稿画面表示

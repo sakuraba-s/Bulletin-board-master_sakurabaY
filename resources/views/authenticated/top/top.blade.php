@@ -22,7 +22,6 @@
       <!-- postのidをGET送信で送る -->
       <!-- タイトルは詳細画面へリンクになっている -->
 
-
         <!-- サブカテゴリ -->
         <p><span class="category_btn">{{ $post->subCategory->sub_category }}</span></p>
 

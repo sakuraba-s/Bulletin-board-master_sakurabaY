@@ -49,8 +49,5 @@
             @yield('content')
         </main>
     </div>
-
-    <script src="{{ asset('js/top.js') }}" rel="stylesheet"></script>
-
 </body>
 </html>
