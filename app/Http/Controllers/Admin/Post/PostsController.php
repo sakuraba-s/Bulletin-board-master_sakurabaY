@@ -11,6 +11,7 @@ use App\Http\Requests\EditFormRequest;
 // 使用するモデルのパス
 use App\Models\Posts\Post;
 use App\Models\Posts\Like;
+use App\Models\Posts\PostCommentLike;
 use App\Models\Posts\PostComment;
 use App\Models\Posts\MainCategory;
 use App\Models\Posts\SubCategory;
@@ -89,9 +90,14 @@ class PostsController extends Controller
     // サブカテゴリの削除
     public function subCategoryDelete($id){
         // ddd($id);
+
+        if ( Post::where('sub_category_id', $id)->exists())
+        {
+        return redirect()->route('category.create')->with('flash_message', '※削除しようとしたサブカテゴリには投稿があります');
+        } else {
         SubCategory::findOrFail($id)->delete();
         return redirect()->route('category.create');
-    }
+    }}
     
     // いいね機能
     // 投稿にいいねをつける
@@ -115,11 +121,45 @@ class PostsController extends Controller
         // jsに結果を戻す
         // return redirect()->route('top');
     }
+    // コメントいいね機能
+    // コメントにいいねをつける
+    public function commentLike($id){
+        // get送信した投稿のidを取得する
+        $user_id = Auth::id();
+        $comment_id = $id;
+
+        // ddd($post_id);
+
+        // いいねをカウントするメソッドをニューする
+        // Likeモデル
+        $like = new PostCommentLike;
+
+        // ライクテーブルに新たに登録する
+        $like->user_id = $user_id;
+        $like->post_comment_id = $comment_id;
+        $like->save();
+        // レコードをDBに保存する
+        return response()->json();
+        // jsに結果を戻す
+        // return redirect()->route('top');
+    }
 
     // 投稿にいいねを解除する
     public function postUnLike($id){
         $user_id = Auth::id();
         $post_id = $id;
+
+        $like = new Like;
+        $like->where('user_id', $user_id)
+            ->where('post_id', $post_id)
+            ->delete();
+        return response()->json();
+        // jsに結果を戻す
+    }
+    // コメントのいいねを解除する
+    public function commentUnLike($id){
+        $user_id = Auth::id();
+        $comment_id = $id;
 
         $like = new Like;
         $like->where('user_id', $user_id)

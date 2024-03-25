@@ -27,7 +27,7 @@ class PostComment extends Model
     // （これをカウントすることで投稿のいいね数をカウントする）
     public function comment_likes()
     {
-        return $this->hasMany(PostCommentFavorite::class,'post_comment_id');
+        return $this->hasMany(PostCommentLike::class,'post_comment_id');
     }
     // コメントとユーザの関係
     // コメントをしたユーザの「名前」を取得

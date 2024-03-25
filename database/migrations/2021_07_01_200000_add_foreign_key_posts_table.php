@@ -16,6 +16,11 @@ class AddForeignKeyPostsTable extends Migration
                 ->on('users')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
+            $table->foreign('sub_category_id')
+                ->references('id')
+                ->on('sub_categories')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 
@@ -23,6 +28,7 @@ class AddForeignKeyPostsTable extends Migration
     {
         Schema::table('posts', function (Blueprint $table) {
             $table->dropForeign(['user_id']);
+            $table->dropForeign(['sub_category_id']);
         });
     }
 }

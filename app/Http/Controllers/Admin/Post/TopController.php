@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 // 使用するモデル
 use App\Models\Posts\Post;
 use App\Models\Posts\PostComment;
+use App\Models\Posts\PostCommentLike;
 use App\Models\Posts\Like;
 use App\Models\Posts\MainCategory;
 use App\Models\Posts\SubCategory;

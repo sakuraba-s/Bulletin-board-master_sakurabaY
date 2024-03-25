@@ -12,8 +12,6 @@
           </div>
           <div class="contributor d-flex">
             <div class="detsail_post_title">{{ $post->title }}
-          <?php echo($post->sub_category_id)?>
-
             </div>
 
                 <!-- ログインユーザのみ表示 削除ボタン編集ボタン-->
@@ -27,6 +25,29 @@
           <div>
             <!-- サブカテゴリ -->
             <p><span class="category_btn">{{ $post->subCategory->sub_category }}</span></p>
+
+          <!-- コメント数 -->
+          <div class="d-flex post_status">
+          <div class="mr-5"><i class="fa fa-comment"></i>
+            <!-- Postモデルのメソッドを使用 -->
+            <span class="">{{ $post->postComments ->count()}}</span>
+          </div>
+          <!-- いいね数 -->
+          <!-- jsにて実装 -->
+          <!-- post_idでポスト送信し、コントローラで受けとる -->
+          <div class="mr-6">
+            @if(Auth::user()->is_Like($post->id))
+            <!-- ログインしているユーザがその投稿をいいねしている場合 -->
+            <p class="m-0"><i class="fas fa-heart un_like_btn" post_id="{{ $post->id }}"></i><span class="like_counts{{ $post->id }}">{{ $post->likes->count() }}</span></p>
+            <!-- iタグで囲った部分にいいねアイコンを設置 -->
+            <!-- 続いてjsに送信するデータを記述 -->
+            @else
+            <!-- ログインしているユーザがその投稿をいいねしていない場合 -->
+            <p class="m-0"><i class="fas fa-heart like_btn" post_id="{{ $post->id }}"></i><span class="like_counts{{ $post->id }}">{{ $post->likes->count() }}</span></p>
+            @endif
+          </div>
+        </div>
+
             <!-- バリデーション -->
             <div>
               @if($errors->first('title'))
@@ -53,6 +74,21 @@
               @endif
             <p><span>{{ $comment->updated_at}}</span>
             <p>{{ $comment->comment }}</p>
+
+              <!-- コメントに対するいいね数 -->
+              <!-- jsにて実装 -->
+              <!-- post_idでポスト送信し、コントローラで受けとる -->
+              <div class="mr-6">
+                @if(Auth::user()->is_PostCommentLike($comment->id))
+                <!-- ログインしているユーザがそのコメントをいいねしている場合 -->
+                <p class="m-0"><i class="fas fa-heart comment_un_like_btn" comment_id="{{ $comment->id }}"></i><span class="comment_like_counts{{ $comment->id }}">{{ $comment->comment_likes->count() }}</span></p>
+                <!-- iタグで囲った部分にいいねアイコンを設置 -->
+                <!-- 続いてjsに送信するデータを記述 -->
+                @else
+                <!-- ログインしているユーザがそのコメントをいいねしていない場合 -->
+                <p class="m-0"><i class="fas fa-heart comment_like_btn" comment_id="{{ $comment->id }}"></i><span class="comment_like_counts{{ $comment->id }}">{{ $comment->comment_likes->count() }}</span></p>
+                @endif
+              </div>
           @endforeach
 
 

@@ -39,6 +39,11 @@
         </div>
 
         <p class="w-75 m-auto">カテゴリ一覧</p>
+        @if (session('flash_message'))
+                        <div class="flash_message">
+                            {{ session('flash_message') }}
+                        </div>
+        @endif
         @foreach($main_categories as $main_category)
             <optgroup label="{{ $main_category->main_category }}"></optgroup>
             <!-- outgroup選択肢グループ要素 -->

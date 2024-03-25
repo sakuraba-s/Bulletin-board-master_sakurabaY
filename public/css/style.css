@@ -123,8 +123,16 @@ li{
 .un_like_btn{
   cursor:pointer;
 }
+.comment_like_btn,
+.un_like_btn{
+  cursor:pointer;
+}
 .un_like,
 .un_like_btn{
+  color:#E2254D;
+}
+.comment_un_like,
+.comment_un_like_btn{
   color:#E2254D;
 }
 .error_message{
@@ -326,6 +334,9 @@ color: #9E9E9E;
 color: #9E9E9E;
 }
 .like_btn{
+color: #9E9E9E;
+}
+.comment_like_btn{
 color: #9E9E9E;
 }
 

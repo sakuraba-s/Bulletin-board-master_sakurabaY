@@ -42,6 +42,11 @@ Route::group(['middleware' => 'auth'], function(){
     // いいねを解除する
     Route::get('/unlike/post/{id}', 'Admin\Post\PostsController@postUnLike')->name('post.unlike');
     // カッコ部分に引き渡したいパラメータをセットする
+    // コメントにいいねをする※ajax経由 非同期通信！
+    Route::get('/like/comment/{id}', 'Admin\Post\PostsController@commentLike')->name('comment.like');
+    // コメントのいいねを解除する
+    Route::get('/unlike/comment/{id}', 'Admin\Post\PostsController@commentUnLike')->name('comment.unlike');
+    // カッコ部分に引き渡したいパラメータをセットする
     // 投稿詳細画面表示
     Route::get('/bulletin_board/detail/{id}', 'Admin\Post\TopController@PostDetail')->name('post.detail');
     // 投稿画面表示

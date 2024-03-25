@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;;
 use Illuminate\Auth\MustVerifyEmail;
 use Auth;
 use App\Models\Posts\Like;
+use App\Models\Posts\PostCommentLike;
 
 
 // 認証機能として使う
@@ -37,6 +38,13 @@ class User extends Authenticatable implements  MustVerifyEmailContract
     // ※引数はビューから受け取っている
     public function is_Like($post_id){
         return Like::where('user_id', Auth::id())->where('post_id', $post_id)->first(['post_likes.id']);
+    }
+    // →ログイン中ユーザはそのコメントをいいねしているかどうか
+    // 「いいねした人のID」が認証中のユーザのID かつ
+    // 「いいねした投稿のID」がその投稿のIDに一致する
+    // ※引数はビューから受け取っている
+    public function is_PostCommentLike($comment_id){
+        return PostCommentLike::where('user_id', Auth::id())->where('post_comment_id', $comment_id)->first(['post_comment_likes.id']);
     }
 
     public function likePostId(){
