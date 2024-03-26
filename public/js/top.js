@@ -63,7 +63,7 @@ $(function () {
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
         // CSRFトークン
         method: "get",
-        url: "/comment/post/" + comment_id,
+        url: "/like/comment/" + comment_id,
         // いいねをつけるコントローラに接続するURLを指定する
         data: {
           comment_id: $(this).attr('comment_id'),
@@ -86,7 +86,7 @@ $(function () {
       $(this).removeClass('un_like_btn');
       $(this).addClass('like_btn');
       var post_id = $(this).attr('post_id');
-      var count = $('.comment_like_counts' + post_id).text();
+      var count = $('.like_counts' + post_id).text();
       var countInt = Number(count);
   
       $.ajax({
@@ -97,7 +97,7 @@ $(function () {
           post_id: $(this).attr('post_id'),
         },
       }).done(function (res) {
-        $('.comment_like_counts' + post_id).text(countInt - 1);
+        $('.like_counts' + post_id).text(countInt - 1);
       }).fail(function () {
       });
     });
@@ -107,18 +107,18 @@ $(function () {
       $(this).removeClass('comment_un_like_btn');
       $(this).addClass('comment_like_btn');
       var comment_id = $(this).attr('comment_id');
-      var count = $('.like_counts' + comment_id).text();
+      var count = $('.comment_like_counts' + comment_id).text();
       var countInt = Number(count);
   
       $.ajax({
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
         method: "get",
-        url: "/unlike/comment/" + post_id,
+        url: "/unlike/comment/" + comment_id,
         data: {
           comment_id: $(this).attr('comment_id'),
         },
       }).done(function (res) {
-        $('.like_counts' + comment_id).text(countInt - 1);
+        $('.comment_like_counts' + comment_id).text(countInt - 1);
       }).fail(function () {
       });
     });

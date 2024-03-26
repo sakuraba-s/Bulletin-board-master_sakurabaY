@@ -105,9 +105,6 @@ class PostsController extends Controller
         // get送信した投稿のidを取得する
         $user_id = Auth::id();
         $post_id = $id;
-
-        // ddd($post_id);
-
         // いいねをカウントするメソッドをニューする
         // Likeモデル
         $like = new Like;
@@ -127,13 +124,9 @@ class PostsController extends Controller
         // get送信した投稿のidを取得する
         $user_id = Auth::id();
         $comment_id = $id;
-
-        // ddd($post_id);
-
         // いいねをカウントするメソッドをニューする
         // Likeモデル
         $like = new PostCommentLike;
-
         // ライクテーブルに新たに登録する
         $like->user_id = $user_id;
         $like->post_comment_id = $comment_id;
@@ -161,9 +154,9 @@ class PostsController extends Controller
         $user_id = Auth::id();
         $comment_id = $id;
 
-        $like = new Like;
+        $like = new PostCommentLike;
         $like->where('user_id', $user_id)
-            ->where('post_id', $post_id)
+            ->where('post_comment_id', $comment_id)
             ->delete();
         return response()->json();
         // jsに結果を戻す
